@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subject} from 'rxjs';
+
 
 @Component({
   selector: 'app-root',
@@ -11,5 +13,8 @@ export class AppComponent {
 
 
 
+
   title = 'mpsuegruppe6';
+
+
 }

@@ -22,7 +22,7 @@ export class StartseiteComponent implements OnInit {
   }
 
   redirectToFrage(){
-    this.router.navigate(['/frage']);
+    this.router.navigate(['/questions']);
 
   }
 
