@@ -20,6 +20,7 @@
   font-size: 20px;
   font-family: 'Helvetica', sans-serif;
   float: left;
+  background-color: red;
 }
 .tname .age { font-weight: 200; }
 .tinfo { font-family: 'Helvetica', sans-serif; }

@@ -91,21 +91,3 @@ Tinder Template by Miami
     font-size: 60px;
     padding: 35px 30px;
 }
-.credit {
-    width: 400px;
-    height: auto;
-    position: relative;
-    top: 60px;
-    text-align: center;
-    background-color: #f0f0f0;
-    padding: 2px 0px;
-}
-.credit a {
-    font-size: 7px;
-    letter-spacing: 5px;
-    color: #c0c0c0;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: 'Helvetica', sans-serif;
-    font-style: italic;
-}
