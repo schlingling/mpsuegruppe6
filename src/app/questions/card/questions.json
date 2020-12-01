@@ -1,0 +1,35 @@
+[
+  {
+    "id": 0,
+    "picture": "https://placehold.it/350x349",
+    "question": "Wie geht es deiner Oma?",
+    "used": false
+  },
+  {
+    "id": 1,
+    "picture": "https://placehold.it/350x349",
+    "question": "Wie geht es deiner Mutter?",
+    "used": false
+  },
+  {
+    "id": 2,
+    "picture": "https://placehold.it/350x349",
+    "question": "Wie geht es deiner Schwester?",
+    "used": false
+  },
+  {
+    "id": 3,
+    "picture": "https://placehold.it/350x349",
+
+    "question": "Wie geht es deiner Tante?",
+    "used": false
+  },
+  {
+    "id": 4,
+    "picture": "https://placehold.it/350x349",
+
+    "question": "Wie geht es deiner Onkel?",
+    "used": false
+  }
+
+]

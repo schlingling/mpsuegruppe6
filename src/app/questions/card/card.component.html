@@ -1,13 +1,16 @@
-<div
-  class="tphoto"
-  [@cardAnimator]="animationState"
-  (@cardAnimator.done)="resetAnimationState($event)"
-  (swipeleft)="startAnimation('swipeleft')"
-  (swiperight)="startAnimation('swiperight')"
->
-  <img [src]="users[index].picture" title="tphoto" alt="Tinder Photo" />
+<div class="row">
+  <div
+    class="tphoto"
+    [@cardAnimator]="animationState"
+    (@cardAnimator.done)="resetAnimationState($event)"
+    (swipeleft)="startAnimation('swipeleft')"
+    (swiperight)="startAnimation('swiperight')"
+  >
+    <img [src]="questions[index].picture" title="tphoto" alt="Tinder Photo" />
+  </div>
 </div>
-
-<div class="tname">
-  {{ users[index].name }}, <span class="age">{{ users[index].age }}</span>
+<div class="row">
+  <div class="tname">
+    {{ questions[index].question }}
+  </div>
 </div>

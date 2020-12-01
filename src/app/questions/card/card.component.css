@@ -21,4 +21,6 @@
   font-family: 'Helvetica', sans-serif;
   float: left;
   background-color: red;
+  margin: 0 auto;
+  position: relative;
 }
