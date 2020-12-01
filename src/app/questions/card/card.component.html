@@ -6,16 +6,8 @@
   (swiperight)="startAnimation('swiperight')"
 >
   <img [src]="users[index].picture" title="tphoto" alt="Tinder Photo" />
+</div>
 
-
-  <div class="tname">
-    {{ users[index].name }}, <span class="age">{{ users[index].age }}</span>
-  </div>
-
-
-
-  <div class="tinfo">
-    <i class="fa fa-book" aria-hidden="true">0</i>
-    <i class="fa fa-users" aria-hidden="true">0</i>
-  </div>
+<div class="tname">
+  {{ users[index].name }}, <span class="age">{{ users[index].age }}</span>
 </div>
