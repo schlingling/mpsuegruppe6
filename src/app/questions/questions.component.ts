@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -23,6 +23,7 @@ export class QuestionsComponent implements OnInit {
 
 
   cardAnimation(value) {
+    console.log(value)
     this.parentSubject.next(value);
   }
 

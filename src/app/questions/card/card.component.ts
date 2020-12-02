@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, DebugElement } from '@angular/core';
 import { trigger, keyframes, animate, transition } from "@angular/animations";
 import * as kf from './keyframes';
 import data from './questions.json';
@@ -41,6 +41,7 @@ export class CardComponent implements OnInit, OnDestroy{
   }
 
   startAnimation(state) {
+    //console.log("komme in startAnimation")
     if (!this.animationState) {
       this.animationState = state;
     }
@@ -48,9 +49,37 @@ export class CardComponent implements OnInit, OnDestroy{
 
   }
 
+  //array of all free questions
+  public free_questions: Question[] = data;
+  public test: Question[];
+  public random_index = 0;
+
   resetAnimationState(state) {
     this.animationState = '';
-    this.index++;
+
+    //TODO make the index randomized and only pick unused questions
+
+    //collect all not used questions
+    this.questions.forEach(function(question){
+      if(question.used == false){
+        console.log("KLAPPT");
+        this.free_questions.push(question)
+      }
+    })
+    console.log(this.free_questions)
+    this.index = (Math.random() * this.free_questions.length) - 1
+
+    console.log("random index: " + this.index)
+
+
+
+
+
+    
+
+    //this.index = (this.index + 1) % this.questions.length;
+
+    //console.log("komme in resetAnimationState mit index danach: " + this.index)
   }
 
 
