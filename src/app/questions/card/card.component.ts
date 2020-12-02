@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { trigger, keyframes, animate, transition } from "@angular/animations";
 import * as kf from './keyframes';
-import * as data from './users.json';
+import data from './questions.json';
 
 import { Subject } from 'rxjs';
-import { User } from './user';
+import { Question } from './question';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { User } from './user';
 })
 export class CardComponent implements OnInit, OnDestroy{
 
-  public users: User[] = data ;
+  public questions: Question[] = data ;
 
 
   public index = 0;
@@ -38,13 +38,14 @@ export class CardComponent implements OnInit, OnDestroy{
       this.startAnimation(event)
     });
 
-
   }
 
   startAnimation(state) {
     if (!this.animationState) {
       this.animationState = state;
     }
+
+
   }
 
   resetAnimationState(state) {
