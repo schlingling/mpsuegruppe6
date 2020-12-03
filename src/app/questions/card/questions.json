@@ -1,11 +1,5 @@
 [
   {
-    "id": 0,
-    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.s",
-    "question": "Warst du heute schon richtig zufrieden?",
-    "used": false
-  },
-  {
     "id": 1,
     "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
     "question": "Hast du heute schon an einen schönen, vergangenen Moment gedacht?",
@@ -15,7 +9,7 @@
     "id": 2,
     "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
     "question": "Wie geht es Hast du heute schon an eine geliebte Person gedacht?",
-    "used": false
+    "used": true
   },
   {
     "id": 3,
@@ -27,7 +21,7 @@
     "id": 4,
     "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
     "question": "Hast du dich heute bereits für etwas bedankt?",
-    "used": false
+    "used": true
   },
   {
     "id": 5,
@@ -45,13 +39,13 @@
     "id": 7,
     "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
     "question": "Hast du heute schon mal nur Zeit mit dir verbracht?",
-    "used": false
+    "used": true
   },
   {
     "id": 8,
     "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
     "question": "Hast du dich heute schon mal bei deiner Famie/Freundin gemeldet?",
-    "used": false
+    "used": true
   },
   {
     "id": 9,

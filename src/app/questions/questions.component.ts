@@ -16,12 +16,6 @@ export class QuestionsComponent implements OnInit {
 
   parentSubject:Subject<string> = new Subject();
 
-
-
-
-
-
-
   cardAnimation(value) {
     this.parentSubject.next(value);
   }

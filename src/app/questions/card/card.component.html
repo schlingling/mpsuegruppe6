@@ -1,16 +1,20 @@
-<div class="row">
-  <div
-    class="tphoto"
-    [@cardAnimator]="animationState"
-    (@cardAnimator.done)="resetAnimationState($event)"
-    (swipeleft)="startAnimation('swipeleft')"
-    (swiperight)="startAnimation('swiperight')"
-  >
-    <img [src]="questions[index].picture" title="tphoto" alt="Tinder Photo" />
-  </div>
-</div>
-<div class="row">
-  <div class="tname">
-    {{ questions[index].question }}
+<div
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState($event)"
+  (swipeleft)="startAnimation('swipeleft')"
+  (swiperight)="startAnimation('swiperight')"
+>
+  <div class="row justify-content-center">
+    <div class="card " style="width: 18rem">
+      <img
+        class="card-img-top"
+        [src]="free_questions[index].picture"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <p class="card-text">{{ free_questions[index].question }}</p>
+        <p>Verfügbare Fragen: {{ free_questions.length }}</p>
+      </div>
+    </div>
   </div>
 </div>
