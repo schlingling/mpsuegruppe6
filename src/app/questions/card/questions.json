@@ -1,34 +1,74 @@
 [
   {
     "id": 0,
-    "picture": "https://placehold.it/350x349",
-    "question": "Wie geht es deiner Oma?",
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.s",
+    "question": "Warst du heute schon richtig zufrieden?",
     "used": false
   },
   {
     "id": 1,
-    "picture": "https://placehold.it/350x349",
-    "question": "Wie geht es deiner Mutter?",
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Hast du heute schon an einen schönen, vergangenen Moment gedacht?",
     "used": false
   },
   {
     "id": 2,
-    "picture": "https://placehold.it/350x349",
-    "question": "Wie geht es deiner Schwester?",
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Wie geht es Hast du heute schon an eine geliebte Person gedacht?",
     "used": false
   },
   {
     "id": 3,
-    "picture": "https://placehold.it/350x349",
-
-    "question": "Wie geht es deiner Tante?",
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Wie geht es deiner Hast du heHast du heute etwas einzigartiges erlebt?",
     "used": false
   },
   {
     "id": 4,
-    "picture": "https://placehold.it/350x349",
-
-    "question": "Wie geht es deiner Onkel?",
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Hast du dich heute bereits für etwas bedankt?",
+    "used": false
+  },
+  {
+    "id": 5,
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Hast du dich heute bei einem Freund gemeldet?",
+    "used": false
+  },
+  {
+    "id": 6,
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Warst du heute schon einmal an der frischen Luft?",
+    "used": false
+  },
+  {
+    "id": 7,
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Hast du heute schon mal nur Zeit mit dir verbracht?",
+    "used": false
+  },
+  {
+    "id": 8,
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Hast du dich heute schon mal bei deiner Famie/Freundin gemeldet?",
+    "used": false
+  },
+  {
+    "id": 9,
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Hast du heute schon genügend Wasser getrunken?",
+    "used": false
+  },
+  {
+    "id": 10,
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "ist dir bewusst, was du in deinem Leben bisher geschafft hast?",
+    "used": false
+  },
+  {
+    "id": 11,
+    "picture": "https://blog.hrps.org/sites/default/files/images/growthmindset.png",
+    "question": "Hast Du Dich heute schon bewegt?",
     "used": false
   }
 
