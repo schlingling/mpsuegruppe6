@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { trigger, keyframes, animate, transition } from '@angular/animations';
-import * as kf from './keyframes';
-import data from './questions.json';
+import { Subject, Subscription } from 'rxjs';
 
-import { Subject } from 'rxjs';
-import { Question } from './question';
+import * as kf from './keyframes';
+import { QuestionsService } from './../../shared/questions.service';
+import { Question } from './../../shared/question';
 
 @Component({
   selector: 'app-card',
@@ -18,43 +18,40 @@ import { Question } from './question';
   ],
 })
 export class CardComponent implements OnInit, OnDestroy {
-  public questions: Question[] = data; //questions from fake REST-Api,
-  public free_questions: Question[] = []; //questions that are ready to display, becaue not choosen already
-  public choosen_questions: Question[] = []; //questions to reflect on later
-
-  public index = 0;
   @Input()
   parentSubject: Subject<any>;
+  private indexSub: Subscription;
+  private questionsSub: Subscription;
 
   animationState: string;
-  constructor() {}
+  public free_questions: Question[] = []; //questions from Questionsservice
+  public index: number = 0; //index from QuestionsService
 
-  calls = 0;
+  constructor(private questionsService: QuestionsService) {}
 
   ngOnInit() {
     //Check, which questions are displayable
-    this.questions.forEach((q) => {
-      if (q.used == false) {
-        this.free_questions.push(q);
-      }
-    });
+    this.questionsService.initializeSession();
 
-    //Set Subscription for "newcard requested"-Event
+    //Set inital values from service
+    this.free_questions = this.questionsService.getFreeQuestions();
+    this.index = this.questionsService.getIndex();
+
+    //Listen to updates of freeQuestions & index
+    this.indexSub = this.questionsService.indexChanged.subscribe((index) => {
+      this.index = index;
+    });
+    this.questionsSub = this.questionsService.questionChanged.subscribe(
+      (questions) => {
+        this.free_questions = questions;
+      }
+    );
+
+    //Listen for "newcard requested"-Event --> wenn buttons geklickt werden, dann neue Values ziehen
     this.parentSubject.subscribe((event) => {
       this.startAnimation(event);
-
-      console.log(event);
       //Set actual question to USED
-
-      if (event === 'swipeleft') {
-        this.choosen_questions.push(this.free_questions[this.index]);
-        this.free_questions.splice(this.index, 1);
-
-      }
-      this.free_questions['used'] = true;
-
-      //Get new random index
-      this.index = Math.floor(Math.random() * this.free_questions.length);
+      this.questionsService.updateChoosenQuestions(event);
     });
   }
 
@@ -70,5 +67,7 @@ export class CardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.parentSubject.unsubscribe();
+    this.indexSub.unsubscribe();
+    this.questionsSub.unsubscribe();
   }
 }

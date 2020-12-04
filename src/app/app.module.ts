@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import {  HttpClientModule } from '@angular/common/http';
 
 
 
@@ -12,6 +13,7 @@ import { StartseiteComponent } from './startseite/startseite.component';
 import { AboutseiteComponent } from './aboutseite/aboutseite.component';
 import { CardComponent } from './questions/card/card.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { QuestionsService } from './shared/questions.service';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,10 @@ import { QuestionsComponent } from './questions/questions.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [QuestionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
