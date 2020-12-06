@@ -1,9 +1,11 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Question } from './question';
 import data from './questions.json';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +20,9 @@ export class QuestionsService {
   public freeQuestionChanged = new EventEmitter<Question[]>();
   public choosenQuestionChanged = new EventEmitter<Question[]>();
 
-
-
   private questionsUpdated = new Subject(); //später benutzen um mehrere Componenten zu benachrichten
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private router: Router, private firestore: AngularFirestore) {}
 
   initializeSession() {
     //TODO: Make initial GET-Request
@@ -33,9 +33,10 @@ export class QuestionsService {
       }
     });
 
+
+    //console.log(this.questions);
     //Set initial random index
     this.index = Math.floor(Math.random() * this.freeQuestions.length);
-
   }
 
   updateChoosenQuestions(event: string) {
@@ -51,17 +52,34 @@ export class QuestionsService {
     this.freeQuestionChanged.emit(this.freeQuestions);
     this.indexChanged.emit(this.index);
     this.choosenQuestionChanged.emit(this.choosenQuestions);
-
-
-
   }
 
+  //GET
+  getQuestions() {
+    return this.firestore.collection('questions').snapshotChanges();
+  }
 
-  getFreeQuestions(){
+  //POST
+  createQuestion(question: Question) {
+    return this.firestore.collection('questions').add(question);
+  }
+
+  //UPDATE
+  updateQuestion(question: Question) {
+    delete question.id;
+    this.firestore.doc('questions/' + question.id).update(question);
+  }
+
+  //DELETE
+  deleteQuestion(questionID: string) {
+    this.firestore.doc('questions/' + questionID).delete();
+  }
+
+  getFreeQuestions() {
     return this.freeQuestions.slice();
   }
 
-  getIndex(){
+  getIndex() {
     return this.index;
   }
 

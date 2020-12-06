@@ -1,7 +1,7 @@
 export interface Question {
-  id: number;
+  id: string;
   picture: string;
   question: string;
-  used: boolean;
   category: string;
+  used: boolean;
 }
