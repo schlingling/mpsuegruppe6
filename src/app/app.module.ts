@@ -14,6 +14,7 @@ import { AboutseiteComponent } from './aboutseite/aboutseite.component';
 import { CardComponent } from './questions/card/card.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { QuestionsService } from './shared/questions.service';
+import { MeditationComponent } from './meditation/meditation.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { QuestionsService } from './shared/questions.service';
     AboutseiteComponent,
     CardComponent,
     QuestionsComponent,
+    MeditationComponent,
 
 
   ],

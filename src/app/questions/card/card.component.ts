@@ -20,8 +20,14 @@ import { Question } from './../../shared/question';
 export class CardComponent implements OnInit, OnDestroy {
   @Input()
   parentSubject: Subject<any>;
+
+
+  @Input()
+  choosenQuestionsIsFull: boolean;
+
   private indexSub: Subscription;
-  private questionsSub: Subscription;
+  private freeQuestionsSub: Subscription;
+
 
   animationState: string;
   public free_questions: Question[] = []; //questions from Questionsservice
@@ -41,7 +47,7 @@ export class CardComponent implements OnInit, OnDestroy {
     this.indexSub = this.questionsService.indexChanged.subscribe((index) => {
       this.index = index;
     });
-    this.questionsSub = this.questionsService.questionChanged.subscribe(
+    this.freeQuestionsSub = this.questionsService.freeQuestionChanged.subscribe(
       (questions) => {
         this.free_questions = questions;
       }
@@ -68,6 +74,6 @@ export class CardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.parentSubject.unsubscribe();
     this.indexSub.unsubscribe();
-    this.questionsSub.unsubscribe();
+    this.freeQuestionsSub.unsubscribe();
   }
 }

@@ -15,7 +15,9 @@ export class QuestionsService {
   private index: number = 0;
 
   public indexChanged = new EventEmitter<number>();
-  public questionChanged = new EventEmitter<Question[]>();
+  public freeQuestionChanged = new EventEmitter<Question[]>();
+  public choosenQuestionChanged = new EventEmitter<Question[]>();
+
 
 
   private questionsUpdated = new Subject(); //später benutzen um mehrere Componenten zu benachrichten
@@ -46,8 +48,11 @@ export class QuestionsService {
     //Get new random index
     this.index = Math.floor(Math.random() * this.freeQuestions.length);
 
-    this.questionChanged.emit(this.freeQuestions);
+    this.freeQuestionChanged.emit(this.freeQuestions);
     this.indexChanged.emit(this.index);
+    this.choosenQuestionChanged.emit(this.choosenQuestions);
+
+
 
   }
 

@@ -3,4 +3,5 @@ export interface Question {
   picture: string;
   question: string;
   used: boolean;
+  category: string;
 }
