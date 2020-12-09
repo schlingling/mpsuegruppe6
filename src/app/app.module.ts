@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -34,6 +34,7 @@ import { MeditationComponent } from './meditation/meditation.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HammerModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,

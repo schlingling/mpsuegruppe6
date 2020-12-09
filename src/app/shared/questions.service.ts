@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class QuestionsService {
-  private questions: Question[] = data; //questions from fake REST-Api,
+  private questions: Question[] = data;
   private freeQuestions: Question[] = []; //questions that are ready to display, becaue not choosen already
   private choosenQuestions: Question[] = []; //questions to reflect on later
   private index: number = 0;
@@ -27,12 +27,30 @@ export class QuestionsService {
   initializeSession() {
     //TODO: Make initial GET-Request
     //Check, which questions are displayable
+
+
     this.questions.forEach((q) => {
       if (q.used == false) {
         this.freeQuestions.push(q);
       }
     });
+    /*
+    this.firestore
+      .collection('questions')
+      .get()
+      .subscribe((ss) => {
+        ss.docs.forEach((doc) => {
+          const q = doc.data() as Question;
+          console.log(q.question);
+          const question: Question = {id:"1", picture: q.picture,question:q.question, category: q.category, used: q.used};
+          this.questions.push(question);
+        });
+      });*/
 
+
+
+
+    console.log(this.questions);
 
     //console.log(this.questions);
     //Set initial random index

@@ -39,6 +39,11 @@ export class QuestionsComponent implements OnInit, OnDestroy {
 
   parentSubject: Subject<string> = new Subject();
 
+  /*
+  getCardAnimation(){
+      return this.cardAnimation;
+  }*/
+
   cardAnimation(value) {
     this.parentSubject.next(value);
   }

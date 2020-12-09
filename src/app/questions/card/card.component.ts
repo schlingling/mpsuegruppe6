@@ -25,6 +25,9 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input()
   choosenQuestionsIsFull: boolean;
 
+  @Input()
+  cardanimation;
+
   private indexSub: Subscription;
   private freeQuestionsSub: Subscription;
 
