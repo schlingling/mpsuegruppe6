@@ -12,6 +12,9 @@ import { map } from 'rxjs/operators';
 })
 export class QuestionsService {
   private questions: Question[] = data;
+  private questions2: Question[] = data;
+  private ques : Question;
+
   private freeQuestions: Question[] = []; //questions that are ready to display, becaue not choosen already
   private choosenQuestions: Question[] = []; //questions to reflect on later
   private index: number = 0;
@@ -28,12 +31,12 @@ export class QuestionsService {
     //TODO: Make initial GET-Request
     //Check, which questions are displayable
 
-
-    this.questions.forEach((q) => {
+    /*this.questions.forEach((q) => {
       if (q.used == false) {
         this.freeQuestions.push(q);
       }
     });
+    */
     /*
     this.firestore
       .collection('questions')
@@ -46,12 +49,41 @@ export class QuestionsService {
           this.questions.push(question);
         });
       });*/
+    this.fetchData();
+
+
 
     console.log(this.questions);
+    console.log(this.questions2);
+    console.log(this.ques);
+
+
+    //console.log(this.questions);
 
     //console.log(this.questions);
     //Set initial random index
     this.index = Math.floor(Math.random() * this.freeQuestions.length);
+  }
+
+  async fetchData() {
+    const data = await this.firestore.collection('questions').get().toPromise();
+
+    const ques : Question[]=[];
+    data.forEach((doc) => {
+      const q = doc.data() as Question;
+      //console.log(q.question);
+      const question: Question = {
+        id: '1',
+        picture: q.picture,
+        question: q.question,
+        category: q.category,
+        used: q.used,
+      };
+      this.questions.push(question);
+      this.questions.push(question);
+
+      this.ques=question;
+    });
   }
 
   updateChoosenQuestions(event: string) {
