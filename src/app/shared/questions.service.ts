@@ -47,9 +47,6 @@ export class QuestionsService {
         });
       });*/
 
-
-
-
     console.log(this.questions);
 
     //console.log(this.questions);
