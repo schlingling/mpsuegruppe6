@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class QuestionsService {
   private questions: Question[] = data;
-  private questions2: Question[] = data;
+  private questions2: Question[] = [];
   private ques : Question;
 
   private freeQuestions: Question[] = []; //questions that are ready to display, becaue not choosen already
@@ -31,12 +31,12 @@ export class QuestionsService {
     //TODO: Make initial GET-Request
     //Check, which questions are displayable
 
-    /*this.questions.forEach((q) => {
+    this.questions.forEach((q) => {
       if (q.used == false) {
         this.freeQuestions.push(q);
       }
     });
-    */
+    
     /*
     this.firestore
       .collection('questions')
@@ -53,8 +53,12 @@ export class QuestionsService {
 
 
 
-    console.log(this.questions);
-    console.log(this.questions2);
+    console.log("question1: ")
+    console.log( this.questions);
+
+    console.log("question2: ")
+
+    console.log( this.questions2);
     console.log(this.ques);
 
 
@@ -79,10 +83,7 @@ export class QuestionsService {
         category: q.category,
         used: q.used,
       };
-      this.questions.push(question);
-      this.questions.push(question);
-
-      this.ques=question;
+      this.questions2.push(question);
     });
   }
 
