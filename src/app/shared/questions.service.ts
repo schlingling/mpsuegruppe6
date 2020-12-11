@@ -39,4 +39,8 @@ export class QuestionsService {
 
   updateFreeQuestions(event: string) {}
 
+  getFirestore(){
+    return this.firestore;
+  }
+
 }

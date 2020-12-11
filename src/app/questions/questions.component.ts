@@ -6,6 +6,11 @@ import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from './keyframes';
 import { Question } from './../shared/question';
 
+
+//import data from './../shared/questions.json';
+
+
+
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
@@ -25,7 +30,6 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   public free_questions: Question[] = []; //free_questions
   public choosen_questions: Question[] = []; //choosen_questions
   public questions_categories: String[] = [];
-
   public index: number = 0;
 
   animationState: string;
@@ -33,9 +37,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   constructor(
     private questionsService: QuestionsService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     //INITIAL GET-REQEUST FOR MESSAGES
     this.questionsService.getQuestions().subscribe((data) => {
       this.questions = data.map((e) => {
@@ -56,12 +58,28 @@ export class QuestionsComponent implements OnInit, OnDestroy {
         }
       });
 
-      console.log(this.free_questions)
-
       this.index = Math.floor(Math.random() * this.free_questions.length);
       this.contentLoaded = Promise.resolve(true);
     });
+  }
 
+  ngOnInit(): void {
+    /*
+    //SCRIPT FOR AUTOIMPORT DATA TO FIRESTORE
+    data.forEach((obj:Question) => {
+      this.questionsService.getFirestore().collection("questions").add({
+        picture: obj.picture,
+        question: obj.question,
+        category: obj.category,
+        used: obj.used,
+      }).then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+  });
+*/
   }
 
   cardAnimation(event: string) {
