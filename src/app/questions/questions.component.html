@@ -1,3 +1,4 @@
+<!--
 <app-card
   [parentSubject]="parentSubject"
   [choosenQuestionsIsFull]="choosenQuestionsIsFull"
@@ -5,6 +6,31 @@
   *ngIf="!choosenQuestionsIsFull"
 >
 </app-card>
+-->
+
+<div
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState($event)"
+  (swipeleft)="cardAnimation('swipeleft')"
+  (swiperight)="cardAnimation('swiperight')"
+  *ngIf="!choosenQuestionsIsFull"
+>
+  <div class="row justify-content-center">
+    <div class="card " style="width: 18rem">
+      <img
+        class="card-img-top"
+        [src]="free_questions[index].picture"
+        alt="Card image cap"
+      />
+      <div class="card-body text-center">
+        <p class="card-text">{{ free_questions[index].question }}</p>
+        <p>Verfügbare Fragen: {{ free_questions.length }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <div class="row text-center" *ngIf="!choosenQuestionsIsFull">
   <div class="col">
