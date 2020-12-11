@@ -1,6 +1,12 @@
-<app-card [parentSubject]="parentSubject"> </app-card>
+<app-card
+  [parentSubject]="parentSubject"
+  [choosenQuestionsIsFull]="choosenQuestionsIsFull"
+  [cardanimation]="cardAnimation"
+  *ngIf="!choosenQuestionsIsFull"
+>
+</app-card>
 
-<div class="row text-center">
+<div class="row text-center" *ngIf="!choosenQuestionsIsFull">
   <div class="col">
     <div (click)="cardAnimation('swipeleft')" class="tno">
       <i class="fa fa-times" aria-hidden="true"></i>
@@ -9,6 +15,41 @@
   <div class="col">
     <div (click)="cardAnimation('swiperight')" class="tyes">
       <i class="fa fa-heart" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>
+
+<div
+  class="row justify-content-center align-items-center"
+  *ngIf="choosenQuestionsIsFull"
+>
+  <div class="card" style="width: 25rem">
+    <div class="card-body">
+      <div class="text-center">
+        <h5 class="card-title">Super! Der erste Schritt ist geschafft.</h5>
+        <p class="card-text">
+          Du hast nun drei Fragen erreicht, über die du in den nächsten Minuten
+          reflektieren kannst.
+        </p>
+        <p class="card-text">
+          Dir wird nun die Zeit gegeben, um dir über Fragen aus folgenden
+          Bereichen klarer zu werden:
+        </p>
+      </div>
+      <div style="margin: 20px">
+        <ul>
+          <li *ngFor="let category of categories">{{ category }}</li>
+        </ul>
+        <div class="text-center" style="margin: 20px">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="redirectToMeditation()"
+          >
+            Starte Medidation
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

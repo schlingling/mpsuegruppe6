@@ -1,9 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import {  HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
 
 
 
@@ -14,6 +17,7 @@ import { AboutseiteComponent } from './aboutseite/aboutseite.component';
 import { CardComponent } from './questions/card/card.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { QuestionsService } from './shared/questions.service';
+import { MeditationComponent } from './meditation/meditation.component';
 
 @NgModule({
   declarations: [
@@ -23,15 +27,19 @@ import { QuestionsService } from './shared/questions.service';
     AboutseiteComponent,
     CardComponent,
     QuestionsComponent,
+    MeditationComponent,
 
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HammerModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
   ],
   providers: [QuestionsService],
   bootstrap: [AppComponent]

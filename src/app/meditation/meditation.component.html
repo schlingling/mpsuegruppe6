@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+  <div class="card align-items-center" style="width: 18rem">
+        <div class="card-body text-center">
+      <h5 class="card-title">{{ timeLeft }} Seconds Left....</h5>
+      <p class="card-text">
+        Der Timer kann mit den entsprechenden Buttons gestartet werden.
+      </p>
+      <button type="button" class="btn btn-success" (click)="startTimer()">
+        Start
+      </button>
+      <button type="button" class="btn btn-warning" (click)="pauseTimer()">
+        Pause
+      </button>
+    </div>
+  </div>
+</div>
