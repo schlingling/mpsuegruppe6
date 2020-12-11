@@ -11,10 +11,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class QuestionsService {
+  
   private questions: Question[] = data;
   private questions2: Question[] = [];
   private ques : Question;
-
   private freeQuestions: Question[] = []; //questions that are ready to display, becaue not choosen already
   private choosenQuestions: Question[] = []; //questions to reflect on later
   private index: number = 0;
@@ -52,16 +52,6 @@ export class QuestionsService {
     this.fetchData();
 
 
-
-    console.log("question1: ")
-    console.log( this.questions);
-
-    console.log("question2: ")
-
-    console.log( this.questions2);
-    console.log(this.ques);
-
-
     //console.log(this.questions);
 
     //console.log(this.questions);
@@ -85,6 +75,8 @@ export class QuestionsService {
       };
       this.questions2.push(question);
     });
+
+    
   }
 
   updateChoosenQuestions(event: string) {

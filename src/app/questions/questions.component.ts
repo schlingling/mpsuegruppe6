@@ -5,7 +5,7 @@ import { QuestionsService } from '../shared/questions.service';
 import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from './keyframes';
 import { Question } from './../shared/question';
-import data from './../app.component.specquestions.json';
+import data from './../shared/questions.json';
 
 
 
@@ -22,11 +22,19 @@ import data from './../app.component.specquestions.json';
 })
 export class QuestionsComponent implements OnInit, OnDestroy {
   choosenQuestionsIsFull: boolean = false;
+  
   parentSubject: Subject<string> = new Subject();
+  
   private choosenQuestionsSub: Subscription;
   categories: String[] = [];
   private questions: Question[] = data;
   animationState: string;
+  
+  
+  public contentLoaded: Promise<boolean>;
+
+  public questionsTest: Question[] = [];
+
 
   public free_questions: Question[] = []; //questions from Questionsservice
   public index: number = 0; //index from QuestionsService
@@ -34,7 +42,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   private indexSub: Subscription;
   private freeQuestionsSub: Subscription;
 
-  constructor(private questionsService: QuestionsService, private router: Router) {}
+  constructor(private questionsService: QuestionsService, private router: Router) { }
 
   ngOnInit(): void {
     this.choosenQuestionsSub = this.questionsService.choosenQuestionChanged.subscribe(
@@ -50,7 +58,28 @@ export class QuestionsComponent implements OnInit, OnDestroy {
       }
     );
 
-      //Check, which questions are displayable
+
+    this.questionsService.getQuestions().subscribe(data => {
+      this.questionsTest = data.map(e => {
+        console.log(e.payload.doc.data());
+        const q = e.payload.doc.data() as Question;
+        return {
+          id: e.payload.doc.id,
+          picture: q.picture,
+          question: q.question,
+          category: q.category,
+          used: q.used,
+        } as Question;
+      })
+
+      console.log(this.questionsTest);
+      this.contentLoaded = Promise.resolve(true);
+
+    });
+
+
+
+    //Check, which questions are displayables
     this.questionsService.initializeSession();
 
     //Set inital values from service
@@ -87,7 +116,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     this.parentSubject.next(value);
   }
 
-  redirectToMeditation(){
+  redirectToMeditation() {
     this.router.navigate(['/meditation']);
 
   }
