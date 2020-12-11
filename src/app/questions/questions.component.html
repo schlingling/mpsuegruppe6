@@ -5,7 +5,7 @@
   (@cardAnimator.done)="resetAnimationState($event)"
   (swipeleft)="cardAnimation('swipeleft')"
   (swiperight)="cardAnimation('swiperight')"
-  *ngIf="!choosenQuestionsIsFull && ( contentLoaded | async )"
+  *ngIf=" contentLoaded | async "
 >
   <div class="row justify-content-center">
     <div class="card " style="width: 18rem">
@@ -16,7 +16,6 @@
       />
       <div class="card-body text-center">
         <p class="card-text">{{ free_questions[index].question }}</p>
-        <p class="card-text">{{ questionsTest[0].question }}</p>
         <p>Verfügbare Fragen: {{ free_questions.length }}</p>
       </div>
     </div>
@@ -57,7 +56,7 @@
       </div>
       <div style="margin: 20px">
         <ul>
-          <li *ngFor="let category of categories">{{ category }}</li>
+          <li *ngFor="let category of questions_categories">{{ category }}</li>
         </ul>
         <div class="text-center" style="margin: 20px">
           <button

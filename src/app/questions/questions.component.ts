@@ -5,9 +5,6 @@ import { QuestionsService } from '../shared/questions.service';
 import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from './keyframes';
 import { Question } from './../shared/question';
-import data from './../shared/questions.json';
-
-
 
 @Component({
   selector: 'app-questions',
@@ -21,47 +18,27 @@ import data from './../shared/questions.json';
   ],
 })
 export class QuestionsComponent implements OnInit, OnDestroy {
-  choosenQuestionsIsFull: boolean = false;
-  
-  parentSubject: Subject<string> = new Subject();
-  
-  private choosenQuestionsSub: Subscription;
-  categories: String[] = [];
-  private questions: Question[] = data;
-  animationState: string;
-  
-  
+  public choosenQuestionsIsFull: boolean = false;
   public contentLoaded: Promise<boolean>;
 
-  public questionsTest: Question[] = [];
+  public questions: Question[] = []; //questions from Questionsservice
+  public free_questions: Question[] = []; //free_questions
+  public choosen_questions: Question[] = []; //choosen_questions
+  public questions_categories: String[] = [];
 
+  public index: number = 0;
 
-  public free_questions: Question[] = []; //questions from Questionsservice
-  public index: number = 0; //index from QuestionsService
+  animationState: string;
 
-  private indexSub: Subscription;
-  private freeQuestionsSub: Subscription;
-
-  constructor(private questionsService: QuestionsService, private router: Router) { }
+  constructor(
+    private questionsService: QuestionsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.choosenQuestionsSub = this.questionsService.choosenQuestionChanged.subscribe(
-      (choosenQuestions) => {
-        if (choosenQuestions.length >= 3) {
-          this.choosenQuestionsIsFull = true;
-          choosenQuestions.forEach((q) => {
-            if (!this.categories.includes(q.category)) {
-              this.categories.push(q.category);
-            }
-          });
-        }
-      }
-    );
-
-
-    this.questionsService.getQuestions().subscribe(data => {
-      this.questionsTest = data.map(e => {
-        console.log(e.payload.doc.data());
+    //INITIAL GET-REQEUST FOR MESSAGES
+    this.questionsService.getQuestions().subscribe((data) => {
+      this.questions = data.map((e) => {
         const q = e.payload.doc.data() as Question;
         return {
           id: e.payload.doc.id,
@@ -70,55 +47,48 @@ export class QuestionsComponent implements OnInit, OnDestroy {
           category: q.category,
           used: q.used,
         } as Question;
-      })
+      });
 
-      console.log(this.questionsTest);
+      console.log(this.questions)
+      this.questions.forEach((q) => {
+        if (q.used == false) {
+          this.free_questions.push(q);
+        }
+      });
+
+      console.log(this.free_questions)
+
+      this.index = Math.floor(Math.random() * this.free_questions.length);
       this.contentLoaded = Promise.resolve(true);
-
     });
-
-
-
-    //Check, which questions are displayables
-    this.questionsService.initializeSession();
-
-    //Set inital values from service
-    this.free_questions = this.questionsService.getFreeQuestions();
-    this.index = this.questionsService.getIndex();
-
-    //Listen to updates of freeQuestions & index
-    this.indexSub = this.questionsService.indexChanged.subscribe((index) => {
-      this.index = index;
-    });
-    this.freeQuestionsSub = this.questionsService.freeQuestionChanged.subscribe(
-      (questions) => {
-        this.free_questions = questions;
-      }
-    );
-
-    //Listen for "newcard requested"-Event --> wenn buttons geklickt werden, dann neue Values ziehen
-    this.parentSubject.subscribe((event) => {
-      this.startAnimation(event);
-      //Set actual question to USED
-      this.questionsService.updateChoosenQuestions(event);
-    });
-
 
   }
 
+  cardAnimation(event: string) {
+    this.startAnimation(event);
 
-  /*
-  getCardAnimation(){
-      return this.cardAnimation;
-  }*/
+    if (event === 'swipeleft') {
+      this.choosen_questions.push(this.free_questions[this.index]);
+      this.free_questions.splice(this.index, 1);
+    }
+    this.free_questions['used'] = true; //ggf. obsolet
 
-  cardAnimation(value) {
-    this.parentSubject.next(value);
+    //Get new random index
+    this.index = Math.floor(Math.random() * this.free_questions.length);
+
+    if (this.choosen_questions.length >= 3) {
+      this.choosenQuestionsIsFull = true;
+      this.choosen_questions.forEach((q) => {
+        if (!this.questions_categories.includes(q.category)) {
+          this.questions_categories.push(q.category);
+        }
+      });
+    }
+    //TODO: Call to service for updating values
   }
 
   redirectToMeditation() {
     this.router.navigate(['/meditation']);
-
   }
 
   startAnimation(state) {
@@ -131,11 +101,5 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     this.animationState = '';
   }
 
-
-  ngOnDestroy() {
-    this.choosenQuestionsSub.unsubscribe();
-    this.parentSubject.unsubscribe();
-    this.indexSub.unsubscribe();
-    this.freeQuestionsSub.unsubscribe();
-  }
+  ngOnDestroy() {}
 }
