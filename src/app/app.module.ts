@@ -17,6 +17,11 @@ import { AboutseiteComponent } from './aboutseite/aboutseite.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { QuestionsService } from './shared/questions.service';
 import { MeditationComponent } from './meditation/meditation.component';
+import { LoginComponent } from './admin/login/login.component';
+import { RegisterComponent } from './admin/register/register.component';
+import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './admin/verify-email/verify-email.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,11 @@ import { MeditationComponent } from './meditation/meditation.component';
     AboutseiteComponent,
     QuestionsComponent,
     MeditationComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+    AdminComponent,
 
 
   ],
