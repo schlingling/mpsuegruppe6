@@ -1,10 +1,28 @@
-<app-card
-  [parentSubject]="parentSubject"
-  [choosenQuestionsIsFull]="choosenQuestionsIsFull"
-  [cardanimation]="cardAnimation"
-  *ngIf="!choosenQuestionsIsFull"
+
+
+<div
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState($event)"
+  (swipeleft)="cardAnimation('swipeleft')"
+  (swiperight)="cardAnimation('swiperight')"
+  *ngIf=" !choosenQuestionsIsFull && contentLoaded | async "
 >
-</app-card>
+  <div class="row justify-content-center">
+    <div class="card " style="width: 18rem">
+      <img
+        class="card-img-top"
+        [src]="free_questions[index].picture"
+        alt="Card image cap"
+      />
+      <div class="card-body text-center">
+        <p class="card-text">{{ free_questions[index].question }}</p>
+        <p>Verfügbare Fragen: {{ free_questions.length }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <div class="row text-center" *ngIf="!choosenQuestionsIsFull">
   <div class="col">
@@ -38,7 +56,7 @@
       </div>
       <div style="margin: 20px">
         <ul>
-          <li *ngFor="let category of categories">{{ category }}</li>
+          <li *ngFor="let category of questions_categories">{{ category }}</li>
         </ul>
         <div class="text-center" style="margin: 20px">
           <button

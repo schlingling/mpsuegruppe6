@@ -2,59 +2,122 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { QuestionsService } from '../shared/questions.service';
+import { trigger, keyframes, animate, transition } from '@angular/animations';
+import * as kf from './keyframes';
+import { Question } from './../shared/question';
+
+
+//import data from './../shared/questions.json';
+
+
 
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.css'],
+  animations: [
+    trigger('cardAnimator', [
+      transition('* => swiperight', animate(750, keyframes(kf.swiperight))),
+      transition('* => swipeleft', animate(750, keyframes(kf.swipeleft))),
+    ]),
+  ],
 })
 export class QuestionsComponent implements OnInit, OnDestroy {
-  choosenQuestionsIsFull: boolean = false;
+  public choosenQuestionsIsFull: boolean = false;
+  public contentLoaded: Promise<boolean>;
 
-  private freeQuestionsSub: Subscription;
-  private choosenQuestionsSub: Subscription;
-  categories: String[] = [];
+  public questions: Question[] = []; //questions from Questionsservice
+  public free_questions: Question[] = []; //free_questions
+  public choosen_questions: Question[] = []; //choosen_questions
+  public questions_categories: String[] = [];
+  public index: number = 0;
 
-  constructor(private questionsService: QuestionsService, private router: Router) {}
+  animationState: string;
+
+  constructor(
+    private questionsService: QuestionsService,
+    private router: Router
+  ) {
+    //INITIAL GET-REQEUST FOR MESSAGES
+    this.questionsService.getQuestions().subscribe((data) => {
+      this.questions = data.map((e) => {
+        const q = e.payload.doc.data() as Question;
+        return {
+          id: e.payload.doc.id,
+          picture: q.picture,
+          question: q.question,
+          category: q.category,
+          used: q.used,
+        } as Question;
+      });
+
+      console.log(this.questions)
+      this.questions.forEach((q) => {
+        if (q.used == false) {
+          this.free_questions.push(q);
+        }
+      });
+
+      this.index = Math.floor(Math.random() * this.free_questions.length);
+      this.contentLoaded = Promise.resolve(true);
+    });
+  }
 
   ngOnInit(): void {
-    this.choosenQuestionsSub = this.questionsService.choosenQuestionChanged.subscribe(
-      (choosenQuestions) => {
-        if (choosenQuestions.length >= 3) {
-          console.log(choosenQuestions.length);
-          this.choosenQuestionsIsFull = true;
+    /*
+    //SCRIPT FOR AUTOIMPORT DATA TO FIRESTORE
+    data.forEach((obj:Question) => {
+      this.questionsService.getFirestore().collection("questions").add({
+        picture: obj.picture,
+        question: obj.question,
+        category: obj.category,
+        used: obj.used,
+      }).then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+  });
+*/
+  }
 
-          choosenQuestions.forEach((q) => {
-            if (!this.categories.includes(q.category)) {
-              this.categories.push(q.category);
-            }
-          });
+  cardAnimation(event: string) {
+    this.startAnimation(event);
 
-          console.log(this.categories);
+    if (event === 'swipeleft') {
+      this.choosen_questions.push(this.free_questions[this.index]);
+      this.free_questions.splice(this.index, 1);
+    }
+    this.free_questions['used'] = true; //ggf. obsolet
 
+    //Get new random index
+    this.index = Math.floor(Math.random() * this.free_questions.length);
+
+    if (this.choosen_questions.length >= 3) {
+      this.choosenQuestionsIsFull = true;
+      this.choosen_questions.forEach((q) => {
+        if (!this.questions_categories.includes(q.category)) {
+          this.questions_categories.push(q.category);
         }
-      }
-    );
+      });
+    }
+    //TODO: Call to service for updating values
   }
 
-  parentSubject: Subject<string> = new Subject();
-
-  /*
-  getCardAnimation(){
-      return this.cardAnimation;
-  }*/
-
-  cardAnimation(value) {
-    this.parentSubject.next(value);
-  }
-
-  redirectToMeditation(){
+  redirectToMeditation() {
     this.router.navigate(['/meditation']);
-
   }
 
-
-  ngOnDestroy() {
-    this.choosenQuestionsSub.unsubscribe();
+  startAnimation(state) {
+    if (!this.animationState) {
+      this.animationState = state;
+    }
   }
+
+  resetAnimationState(state) {
+    this.animationState = '';
+  }
+
+  ngOnDestroy() {}
 }
