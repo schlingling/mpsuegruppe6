@@ -7,6 +7,8 @@ import {  HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 
 
 
@@ -17,6 +19,9 @@ import { AboutseiteComponent } from './aboutseite/aboutseite.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { QuestionsService } from './shared/questions.service';
 import { MeditationComponent } from './meditation/meditation.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './auth/auth.guard';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -27,6 +32,11 @@ import { MeditationComponent } from './meditation/meditation.component';
     AboutseiteComponent,
     QuestionsComponent,
     MeditationComponent,
+    LoginComponent,
+    ErrorComponent,
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -36,9 +46,11 @@ import { MeditationComponent } from './meditation/meditation.component';
     FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+
   ],
-  providers: [QuestionsService],
+  providers: [QuestionsService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
