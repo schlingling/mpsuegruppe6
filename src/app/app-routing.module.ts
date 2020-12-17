@@ -18,16 +18,17 @@ const routes: Routes = [
   {
     path: 'questions',
     component: QuestionsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'meditation',
-    component: MeditationComponent,
-    canActivate: [AuthGuard],
+    component: MeditationComponent,canActivate: [AuthGuard]
+
   },
-  { path: '**', component: ErrorComponent },
   { path: 'error', component: ErrorComponent },
+  { path: '**', component: ErrorComponent },
+
 ];
 
 @NgModule({
@@ -35,3 +36,6 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+
+//TODO: canactivate einschalten
