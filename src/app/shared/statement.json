@@ -1,0 +1,39 @@
+[
+    {
+      "id": "1",
+      "statement": "Denke über deine Familie nach",
+      "category": "Familie"
+    },
+    {
+      "id": "1",
+      "statement": "Denke über deine Selbstwertschätzung nach",
+      "category": "Selbstwertschätzung"
+    },
+    {
+      "id": "1",
+      "statement": "Denke über deine Selbstbewusstsein nach",
+      "category": "Selbstbewusstsein"
+    },
+    {
+      "id": "1",
+      "statement": "Denke über deine Freunde nach",
+      "category": "Freunde"
+    },
+    {
+      "id": "1",
+      "statement": "Denke über deine Nächstenliebe nach",
+      "category": "Nächstenliebe"
+    },
+    {
+      "id": "1",
+      "statement": "Denke über deine Entspannung nach",
+      "category": "Entspannung"
+    },
+    {
+      "id": "1",
+      "statement": "Denke über deine Gesundheit nach",
+      "category": "Gesundheit"
+    }
+
+  ]
+  

@@ -11,7 +11,11 @@ export class AppComponent {
 
 
 
+  message:string;
 
+  receiveMessage($event) {
+    this.message = $event
+  }
 
 
   title = 'mpsuegruppe6';

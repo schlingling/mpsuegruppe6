@@ -11,6 +11,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { StartseiteComponent } from './startseite/startseite.component';
 
 const routes: Routes = [
+  /*
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'start', component: StartseiteComponent, canActivate: [AuthGuard] },
@@ -29,6 +30,24 @@ const routes: Routes = [
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent },
 
+    */
+
+   { path: '', redirectTo: '/login', pathMatch: 'full' },
+   { path: 'login', component: LoginComponent },
+   { path: 'start', component: StartseiteComponent},
+   { path: 'about', component: AboutseiteComponent},
+   {
+     path: 'questions',
+     component: QuestionsComponent
+ 
+   },
+   {
+     path: 'meditation',
+     component: MeditationComponent
+ 
+   },
+   { path: 'error', component: ErrorComponent },
+   { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({

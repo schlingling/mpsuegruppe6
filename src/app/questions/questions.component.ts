@@ -1,13 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { QuestionsService } from '../shared/questions.service';
 import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from './keyframes';
 import { Question } from './../shared/question';
+import { Statement } from './../shared/statement';
 
 
-//import data from './../shared/questions.json';
+import data from './../shared/statement.json';
 
 
 
@@ -63,14 +64,13 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    /*
+    
     //SCRIPT FOR AUTOIMPORT DATA TO FIRESTORE
-    data.forEach((obj:Question) => {
-      this.questionsService.getFirestore().collection("questions").add({
-        picture: obj.picture,
-        question: obj.question,
+    /*
+    data.forEach((obj:Statement) => {
+      this.questionsService.getFirestore().collection("statements").add({
+        statement: obj.statement,
         category: obj.category,
-        used: obj.used,
       }).then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);
       })
@@ -78,7 +78,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
           console.error("Error adding document: ", error);
       });
   });
-*/
+  */
+
   }
 
   cardAnimation(event: string) {
@@ -102,6 +103,12 @@ export class QuestionsComponent implements OnInit, OnDestroy {
           this.questions_categories.push(q.category);
         }
       });
+
+      
+      @Output() messageEvent = new EventEmitter<String>();
+     
+      this.messageEvent.emit("test");
+
     }
 
 
