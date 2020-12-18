@@ -1,16 +1,34 @@
-<div class="row justify-content-center">
-  <div class="card align-items-center" style="width: 18rem">
-        <div class="card-body text-center">
-      <h5 class="card-title">{{ timeLeft }} Seconds Left....</h5>
-      <p class="card-text">
-        Der Timer kann mit den entsprechenden Buttons gestartet werden.
-      </p>
-      <button type="button" class="btn btn-success" (click)="startTimer()">
-        Start
-      </button>
-      <button type="button" class="btn btn-warning" (click)="pauseTimer()">
-        Pause
-      </button>
+  <div class="wrapper">
+
+    <div class="row justify-content-center">
+      <h5>{{ timeLeft }} Seconds Left....</h5>
+      <p>Nehme dir nun die Zeit über folgendes nachzudenken: </p>
+
+      <p>Der Timer kann mit den entsprechenden Buttons gestartet werden.</p>
     </div>
+
+  <div class="row justify-content-center">
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Platz für deine Notizen</label>
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="8"
+        ></textarea>
+      </div>
+    </form>
   </div>
-</div>
+  <div class="row justify-content-center">
+    <button type="button" class="btn btn-success" (click)="startTimer()">
+      Start
+    </button>
+    <button type="button" class="btn btn-warning" (click)="pauseTimer()">
+      Pause
+    </button>
+    <div></div>
+  </div>
+
+
+
+  </div>

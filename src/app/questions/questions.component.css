@@ -16,8 +16,8 @@
 }
 .tno i {
     color: #ff695b;
-    font-size: 80px;
-    padding: 17px 28px;
+    font-size: 60px;
+    padding: 25px 20px;
 }
 
 .tyes {
@@ -37,5 +37,5 @@
 .tyes i {
     color: #5de19c;
     font-size: 60px;
-    padding: 35px 30px;
+    padding: 25px 20px;
 }

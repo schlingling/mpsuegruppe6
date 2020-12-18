@@ -51,7 +51,6 @@ export class QuestionsComponent implements OnInit, OnDestroy {
         } as Question;
       });
 
-      console.log(this.questions)
       this.questions.forEach((q) => {
         if (q.used == false) {
           this.free_questions.push(q);
@@ -83,7 +82,9 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   }
 
   cardAnimation(event: string) {
+
     this.startAnimation(event);
+
 
     if (event === 'swipeleft') {
       this.choosen_questions.push(this.free_questions[this.index]);
@@ -102,6 +103,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
         }
       });
     }
+
+
     //TODO: Call to service for updating values
   }
 
