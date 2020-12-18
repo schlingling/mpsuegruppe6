@@ -11,24 +11,20 @@ import { QuestionsComponent } from './questions/questions.component';
 import { StartseiteComponent } from './startseite/startseite.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/start', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'start', component: StartseiteComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutseiteComponent, canActivate: [AuthGuard] },
+  { path: 'start', component: StartseiteComponent },
+  { path: 'about', component: AboutseiteComponent },
   {
     path: 'questions',
     component: QuestionsComponent,
-    canActivate: [AuthGuard]
-
   },
   {
     path: 'meditation',
-    component: MeditationComponent,canActivate: [AuthGuard]
-
+    component: MeditationComponent,
   },
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent },
-
 ];
 
 @NgModule({
@@ -36,6 +32,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
 
 //TODO: canactivate einschalten
