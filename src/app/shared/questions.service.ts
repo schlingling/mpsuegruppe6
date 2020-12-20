@@ -16,8 +16,8 @@ export class QuestionsService {
   constructor(private router: Router, private firestore: AngularFirestore) {}
 
   //GET
-  getQuestions() {
-    return this.firestore.collection('questions').snapshotChanges();
+  getQuestions(document: String) {
+    return this.firestore.collection(''+document).snapshotChanges();
   }
 
   //POST

@@ -40,7 +40,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     //INITIAL GET-REQEUST FOR MESSAGES
-    this.questionsService.getQuestions().subscribe((data) => {
+    this.questionsService.getQuestions('questions').subscribe((data) => {
       this.questions = data.map((e) => {
         const q = e.payload.doc.data() as Question;
         return {
@@ -104,11 +104,11 @@ export class QuestionsComponent implements OnInit, OnDestroy {
         }
       });
 
-      
+      /*
       @Output() messageEvent = new EventEmitter<String>();
      
       this.messageEvent.emit("test");
-
+      */
     }
 
 
