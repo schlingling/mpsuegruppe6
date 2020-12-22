@@ -1,52 +1,92 @@
-<div class="container login-container" *ngIf="!(authService.isLoggedIn)">
-  <div class="row">
-    <div class="col-md-6 login-form-1">
-      <h3>Login or Signup</h3>
+<div class="container login-container" *ngIf="!authService.isLoggedIn&&isLoginMode">
+  <div class="col-md-6 login-form-1">
+    <h3>Login</h3>
 
-      <div class="form-group">
-        <input
-          type="email"
-          [(ngModel)]="email"
-          id="email"
-          class="form-control"
-          required
-          placeholder="Your Email *"
-          value=""
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          [(ngModel)]="password"
-          name="password"
-          required
-          minlength="6"
-          class="form-control"
-          placeholder="Your Password *"
-          value=""
-        />
-      </div>
-      <div class="form-group">
-        <button
-          (click)="signup()"
-          class="btnSubmit"
-          [disabled]="!email || !password"
-        >
-          Signup
-        </button>
-        <button
-          (click)="login()"
-          class="btnSubmit"
-          [disabled]="!email || !password"
-        >
-          Login
-        </button>
-      </div>
-      <div class="form-group">
-        <a (click)="forgotPassword()" class="ForgetPwd">Forget Password?</a>
-      </div>
+    <div class="form-group">
+      <input
+        type="email"
+        [(ngModel)]="email"
+        id="email"
+        class="form-control"
+        required
+        placeholder="Your Email *"
+        value=""
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        [(ngModel)]="password"
+        name="password"
+        required
+        minlength="6"
+        class="form-control"
+        placeholder="Your Password *"
+        value=""
+      />
+    </div>
+    <div class="form-group">
+      <button
+        (click)="login()"
+        class="btn btn-primary"
+        [disabled]="!email || !password"
+      >
+        Login
+      </button>
+    </div>
+    <div class="btn btn-secondary">
+      <a (click)="forgotPassword()" >Forgot password?</a>
+    </div>
+    <div class="btn btn-secondary">
+      <a (click)="switchLoginMode()" >Want to signup?</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container login-container" *ngIf="!authService.isLoggedIn &&!isLoginMode">
+  <div class="col-md-6 login-form-1">
+    <h3>Signup</h3>
+
+    <div class="form-group">
+      <input
+        type="email"
+        [(ngModel)]="email"
+        id="email"
+        class="form-control"
+        required
+        placeholder="Your Email *"
+        value=""
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        [(ngModel)]="password"
+        name="password"
+        required
+        minlength="6"
+        class="form-control"
+        placeholder="Your Password *"
+        value=""
+      />
+    </div>
+    <div class="form-group">
+      <button
+        (click)="signup()"
+        class="btn btn-primary"
+        [disabled]="!email || !password"
+
+      >
+        Signup
+      </button>
+    </div>
+    <div class="form-group">
+      <a (click)="switchLoginMode()" class="ForgetPwd">Want to login?</a>
     </div>
   </div>
 </div>
