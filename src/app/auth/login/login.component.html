@@ -1,4 +1,4 @@
-<div class="container login-container" *ngIf="!(authService.user | async)">
+<div class="container login-container" *ngIf="!(authService.isLoggedIn)">
   <div class="row">
     <div class="col-md-6 login-form-1">
       <h3>Login or Signup</h3>
@@ -45,7 +45,7 @@
         </button>
       </div>
       <div class="form-group">
-        <a href="#" class="ForgetPwd">Forget Password?</a>
+        <a (click)="forgotPassword()" class="ForgetPwd">Forget Password?</a>
       </div>
     </div>
   </div>
