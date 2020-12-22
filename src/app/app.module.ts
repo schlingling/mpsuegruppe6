@@ -23,6 +23,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ErrorComponent } from './error/error.component';
 import { DocumentService } from './shared/document.service';
+import { ReflectionComponent } from './reflection/reflection.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { DocumentService } from './shared/document.service';
     MeditationComponent,
     LoginComponent,
     ErrorComponent,
+    ReflectionComponent,
 
 
 

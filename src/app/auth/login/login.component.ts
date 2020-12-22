@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   isLoginMode = true;
   email: string;
   password: string;
+  username: string;
 
   constructor(public authService: AuthService) { }
 
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   signup() {
-    this.authService.signup(this.email, this.password);
+    this.authService.signup(this.username,this.email, this.password);
     this.email = this.password = '';
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meditation',
@@ -12,7 +13,7 @@ export class MeditationComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,4 +33,7 @@ export class MeditationComponent implements OnInit {
     clearInterval(this.interval);
   }
 
+  navToRef(){
+this.router.navigate(['/reflection']);
+  }
 }

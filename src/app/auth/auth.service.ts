@@ -6,7 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from './login/user.model';
+import { User } from '../shared/interfaces/user';
 
 export interface AuthResponseData {
   kind: string;
@@ -46,7 +46,7 @@ export class AuthService {
     });
   }
 
-  signup(email: string, password: string) {
+  signup(username: string, email: string, password: string) {
     this.firebaseAuth
       .createUserWithEmailAndPassword(email, password)
       .then((userData) => {

@@ -7,6 +7,7 @@ import { ErrorComponent } from './error/error.component';
 
 import { MeditationComponent } from './meditation/meditation.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { ReflectionComponent } from './reflection/reflection.component';
 
 import { StartseiteComponent } from './startseite/startseite.component';
 
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'meditation',
     component: MeditationComponent,canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'reflection',
+    component: ReflectionComponent,canActivate: [AuthGuard]
 
   },
   { path: 'error', component: ErrorComponent },
