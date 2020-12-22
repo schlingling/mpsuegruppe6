@@ -1,18 +1,49 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import {
+  AngularFirestoreDocument,
+  AngularFirestore,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './login/user.model';
+
+export interface AuthResponseData {
+  kind: string;
+  idToken: string;
+  email: string;
+  refreshToken: string;
+  expiresIn: string;
+  localId: string;
+  registered?: boolean;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user = new BehaviorSubject<any>(null);
+  userData: User;
   private tokenExpirationTimer: any;
 
-  constructor(private firebaseAuth: AngularFireAuth, private router: Router) {
-    //this.user = firebaseAuth.authState;
+  constructor(
+    private firebaseAuth: AngularFireAuth,
+    private router: Router,
+    public afs: AngularFirestore
+  ) {
+    /* Saving user data in localstorage when
+    logged in and setting up null when logged out */
+    this.firebaseAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+        //console.log("localstorage")
+        //console.log(localStorage.getItem('user'))
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    });
   }
 
   signup(email: string, password: string) {
@@ -20,9 +51,11 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((userData) => {
         console.log('Success!');
-        this.user.next(new User(userData.user.email, '0', 'asdf', new Date()));
-
-        this.router.navigate(['/start']);
+        //this.user.next(new User(userData.user.email, '0', 'asdf', new Date()));
+        this.setUserData(userData.user).then(() => {
+          //TODO: Verification Mail
+          this.router.navigate(['/start']);
+        });
       })
       .catch((err) => {
         console.log('Something went wrong:', err.message);
@@ -35,32 +68,39 @@ export class AuthService {
       .then((userData) => {
         console.log('Nice, it worked!');
         //TODO: Make user with autologout
-        this.user.next(new User(userData.user.email, '0', 'asdf', new Date()));
-        this.router.navigate(['/start']);
+        this.setUserData(userData.user).then(() => {
+          this.router.navigate(['/start']);
+        });
       })
       .catch((err) => {
         console.log('Something went wrong:', err.message);
       });
   }
 
-  logout() {
-    this.firebaseAuth.signOut();
-    this.user.next(null);
-    this.router.navigate(['/login']);
+  /* Setting up user data when sign in with username/password,
+  sign up with username/password and sign in with social auth
+  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+  setUserData(user) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
   }
 
-  //TODO
-  private handleAuthentication(
-    email: string,
-    userId: string,
-    token: string,
-    expiresIn: number
-  ) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(email, userId, token, expirationDate);
-    this.user.next(user);
-    this.autoLogout(expiresIn * 1000);
-    localStorage.setItem('userData', JSON.stringify(user));
+  logout() {
+    this.firebaseAuth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['/login']);
+    });
   }
 
   //TODO
@@ -68,5 +108,25 @@ export class AuthService {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
+  }
+
+  // Reset Forggot password
+  forgotPassword(passwordResetEmail) {
+    return this.firebaseAuth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  // Returns true when user is looged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    //TODO: Email verifyen
+    //return (user !== null && user.emailVerified !== false) ? true : false;
+    return user !== null ? true : false;
   }
 }

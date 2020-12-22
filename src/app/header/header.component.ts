@@ -10,16 +10,15 @@ import { AuthService } from '../auth/auth.service';
 export class HeaderComponent implements OnInit {
 
   navbarOpen = false;
-  isAuthenticated = false;
   private userSub: Subscription;
 
+  isSS = false;
 
-  constructor(private authService: AuthService) { }
+
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user => {
-      this.isAuthenticated = !!user;
-    });
+
   }
 
   toggleNavbar(){

@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  isLoginMode = true;
   email: string;
   password: string;
 
@@ -29,6 +30,14 @@ export class LoginComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  forgotPassword(){
+    this.authService.forgotPassword(this.email);
+  }
+
+  switchLoginMode(){
+    this.isLoginMode=!this.isLoginMode;
   }
 
 }

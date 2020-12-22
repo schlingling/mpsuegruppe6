@@ -22,6 +22,7 @@ import { MeditationComponent } from './meditation/meditation.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ErrorComponent } from './error/error.component';
+import { DocumentService } from './shared/document.service';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import { ErrorComponent } from './error/error.component';
     AngularFireAuthModule,
 
   ],
-  providers: [QuestionsService,AuthGuard],
+  providers: [QuestionsService,AuthGuard, DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
