@@ -13,7 +13,7 @@ export class MeditationComponent implements OnInit {
   timeLeft: number = 60;
   interval;
 
-  public questions_categories: String[] = ["Entspannung", "Gesundheit", "Familie"];
+  public questions_categories: String[] = [];
   public category: String;
   public all_statements: Statement[] = [];
   public statements_with_category: Statement[] = [];
@@ -27,6 +27,8 @@ export class MeditationComponent implements OnInit {
   constructor(private questionsService: QuestionsService) { }
 
   ngOnInit(): void {
+
+    this.questions_categories = this.questionsService.getCategories()
   }
 
 
@@ -44,6 +46,8 @@ export class MeditationComponent implements OnInit {
         if(this.timeLeft > 0) {
           this.timeLeft--;
         } else {
+
+          
           this.timeLeft = 60;
           this.pausePressed = false;
           this.canPress = true;
@@ -55,10 +59,8 @@ export class MeditationComponent implements OnInit {
   }
 
   public pausePressed: boolean = false;
-  pauseTimer() {
-    this.canPress = true;
-    this.pausePressed = true;
-    clearInterval(this.interval);
+  upload() {
+    //upload data to firestore
    
 
   }
@@ -70,7 +72,7 @@ export class MeditationComponent implements OnInit {
     console.log(this.questions_categories)
 
     this.category = this.questions_categories[0]
-    this.questions_categories.splice(0,0)
+    this.questions_categories.splice(0,1)
     
 
     //INITIAL GET-REQEUST FOR MESSAGES
@@ -93,13 +95,15 @@ export class MeditationComponent implements OnInit {
 
       if(this.statements_with_category.length <= 0){
         //rufe die endcard-component auf
-        console.log("ende");
+        console.log("ende, call endcard component");
+        return;
       }
 
       //pick a random statement of all the matching ones
       this.index = Math.floor(Math.random() * this.statements_with_category.length);
 
-      this.choosen_statement = this.all_statements[this.index].statement
+      this.choosen_statement = this.statements_with_category[this.index].statement
+      console.log(this.choosen_statement)
 
       this.contentLoaded = Promise.resolve(true);
     });
@@ -107,7 +111,6 @@ export class MeditationComponent implements OnInit {
 
 
 
-    this.questions_categories.splice(0,1)
   }
 
 }

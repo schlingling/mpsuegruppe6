@@ -13,7 +13,18 @@ import { map } from 'rxjs/operators';
 export class QuestionsService {
 
 
+  public questions_categories: String[] = []
+
   constructor(private router: Router, private firestore: AngularFirestore) {}
+
+
+  getCategories(){
+    return this.questions_categories;
+  }
+
+  setCategotires(categories: String[]){
+    this.questions_categories = categories.slice()
+  }
 
   //GET
   getQuestions(document: String) {
