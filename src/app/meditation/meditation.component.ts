@@ -97,6 +97,7 @@ export class MeditationComponent implements OnInit {
 
       //pick a all statements, that matched the category
       this.all_statements.forEach((q) => {
+        console.log(q.category)
         if (q.category === this.category) {
           this.statements_with_category.push(q);
         }
@@ -104,7 +105,7 @@ export class MeditationComponent implements OnInit {
 
       if(this.statements_with_category.length <= 0){
         //rufe die endcard-component auf
-        console.log("ende, call endcard component");
+        console.log("ende, call endcard component" + this.statements_with_category.length);
         return;
       }
 
