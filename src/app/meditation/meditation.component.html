@@ -1,37 +1,39 @@
-  <div class="wrapper">
+<div class="wrapper">
 
-    <div class="row justify-content-center">
-      <h5>{{ timeLeft }} Seconds Left....</h5>
-      <p>Nehme dir nun die Zeit über folgendes nachzudenken: </p>
+  <div class="row justify-content-center">
+    <h5>{{ timeLeft }} Seconds Left....</h5>
+    <p>Nehme dir nun die Zeit über folgendes nachzudenken: </p>
 
-      <p>Der Timer kann mit den entsprechenden Buttons gestartet werden.</p>
+    <div>
+    <p>{{ choosen_statement }} </p>
+  </div>
+
+    <p>Der Timer kann mit den entsprechenden Buttons gestartet werden.</p>
+  </div>
+
+<div class="row justify-content-center">
+  <form>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Platz für deine Notizen</label>
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="8"
+        #titleInput
+      ></textarea>
     </div>
-
-  <div class="row justify-content-center">
-    <form>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Platz für deine Notizen</label>
-        <textarea
-          class="form-control"
-          id="exampleFormControlTextarea1"
-          rows="8"
-        ></textarea>
-      </div>
-    </form>
-  </div>
-  <div class="row justify-content-center">
-    <button type="button" class="btn btn-success" (click)="startTimer()">
-      Start
-    </button>
-    <button type="button" class="btn btn-warning" (click)="pauseTimer()">
-      Pause
-    </button>
-    <button type="button" class="btn btn-warning" (click)="navToRef()">
-      Reflection
-    </button>
-    <div></div>
-  </div>
+  </form>
+</div>
+<div class="row justify-content-center">
+  <button type="button" class="btn btn-success" (click)="startTimer()">
+    Start
+  </button>
+  <button type="button" class="btn btn-warning" (click)="upload(titleInput.value)">
+    Upload
+  </button>
+  <div></div>
+</div>
 
 
 
-  </div>
+</div>

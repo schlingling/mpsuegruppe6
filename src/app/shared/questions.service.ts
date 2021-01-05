@@ -12,6 +12,10 @@ import { map } from 'rxjs/operators';
 })
 export class QuestionsService {
 
+  public questions_categories: String[] = []
+  public test: String[] = []
+
+
 
   constructor(private router: Router, private firestore: AngularFirestore) {}
 
@@ -42,5 +46,17 @@ export class QuestionsService {
   getFirestore(){
     return this.firestore;
   }
+
+
+  getCategories(){
+    console.log(this.questions_categories)
+    return this.questions_categories.slice();
+  }
+
+  setCategories(categories: String[]){
+    this.questions_categories = categories
+    console.log(categories)
+  }
+
 
 }

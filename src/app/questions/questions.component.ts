@@ -96,6 +96,8 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     this.index = Math.floor(Math.random() * this.free_questions.length);
 
     if (this.choosen_questions.length >= 3) {
+      this.questionsService.setCategories(this.questions_categories);
+      console.log(this.questions_categories)
       this.choosenQuestionsIsFull = true;
       this.choosen_questions.forEach((q) => {
         if (!this.questions_categories.includes(q.category)) {
