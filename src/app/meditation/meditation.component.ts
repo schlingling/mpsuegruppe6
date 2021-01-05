@@ -1,6 +1,8 @@
+import { Text } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from '../shared/questions.service';
 import { Statement } from './../shared/statement';
+import { TextToSave } from './../shared/text';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class MeditationComponent implements OnInit {
   public contentLoaded: Promise<boolean>;
   public choosen_statement: String;
 
+  public text_to_save: TextToSave = {};
 
 
 
@@ -59,10 +62,16 @@ export class MeditationComponent implements OnInit {
   }
 
   public pausePressed: boolean = false;
-  upload() {
+  upload(text_from_html: string) {
     //upload data to firestore
    
+    this.text_to_save.text = text_from_html;
 
+    //TODO
+    this.text_to_save.user_id = "123123123";
+    this.text_to_save.question_id = "345345345";
+
+    this.questionsService.setTexts(this.text_to_save);
   }
 
   getStatement(){

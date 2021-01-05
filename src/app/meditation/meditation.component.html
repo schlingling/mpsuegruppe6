@@ -4,7 +4,9 @@
       <h5>{{ timeLeft }} Seconds Left....</h5>
       <p>Nehme dir nun die Zeit über folgendes nachzudenken: </p>
 
+      <div>
       <p>{{ choosen_statement }} </p>
+    </div>
 
       <p>Der Timer kann mit den entsprechenden Buttons gestartet werden.</p>
     </div>
@@ -13,10 +15,11 @@
     <form>
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Platz für deine Notizen</label>
-        <textarea
+        <textarea 
           class="form-control"
           id="exampleFormControlTextarea1"
           rows="8"
+          #titleInput
         ></textarea>
       </div>
     </form>
@@ -25,7 +28,7 @@
     <button type="button" class="btn btn-success" (click)="startTimer()">
       Start
     </button>
-    <button type="button" class="btn btn-warning" (click)="upload()">
+    <button type="button" class="btn btn-warning" (click)="upload(titleInput.value)">
       Upload
     </button>
     <div></div>

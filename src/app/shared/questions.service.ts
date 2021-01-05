@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { TextToSave } from './text';
+
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +19,11 @@ export class QuestionsService {
 
   constructor(private router: Router, private firestore: AngularFirestore) {}
 
+
+
+  setTexts(text: TextToSave){
+    this.firestore.collection('texts').add(text)
+  }
 
   getCategories(){
     return this.questions_categories;
