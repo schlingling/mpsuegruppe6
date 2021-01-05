@@ -14,6 +14,10 @@ import { TextToSave } from './text';
 })
 export class QuestionsService {
 
+  public questions_categories: String[] = []
+  public test: String[] = []
+
+
 
   public questions_categories: String[] = []
 
@@ -60,5 +64,17 @@ export class QuestionsService {
   getFirestore(){
     return this.firestore;
   }
+
+
+  getCategories(){
+    console.log(this.questions_categories)
+    return this.questions_categories.slice();
+  }
+
+  setCategories(categories: String[]){
+    this.questions_categories = categories
+    console.log(categories)
+  }
+
 
 }

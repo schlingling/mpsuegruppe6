@@ -16,5 +16,16 @@ import { map } from 'rxjs/operators';
 })
 export class DocumentService {
 
-  constructor() { }
+  constructor(private router: Router, private firestore: AngularFirestore) { }
+
+  getDocument(document: String) {
+    return this.firestore.collection(''+document).snapshotChanges();
+  }
+
+  setDocument(document: string, text: any){
+    this.firestore.collection(document).add(text)
+  }
+
+
+
 }
