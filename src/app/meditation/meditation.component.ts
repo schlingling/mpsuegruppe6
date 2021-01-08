@@ -6,7 +6,7 @@ import { Note } from './../shared/interfaces/note';
 import { DocumentService } from '../shared/document.service';
 import { Router } from '@angular/router';
 import { AuthService} from './../auth/auth.service';
- 
+
 
 @Component({
   selector: 'app-meditation',
@@ -77,7 +77,7 @@ export class MeditationComponent implements OnInit {
     this.text_to_save.note = this.defaultValue;
 
     //TODO
-    this.text_to_save.uid = this.auth.userData.uid;
+    this.text_to_save.uid = this.auth.userData.value.uid;
     this.text_to_save.statement = this.choosen_statement;
 
     this.documentService.setDocument('notes',this.text_to_save);
