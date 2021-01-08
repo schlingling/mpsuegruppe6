@@ -7,6 +7,7 @@ import { ErrorComponent } from './error/error.component';
 
 import { MeditationComponent } from './meditation/meditation.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { RatingComponent } from './rating/rating.component';
 import { ReflectionComponent } from './reflection/reflection.component';
 
 import { StartseiteComponent } from './startseite/startseite.component';
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'reflection',
     component: ReflectionComponent,canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'rating',
+    component: RatingComponent,canActivate: [AuthGuard]
 
   },
   { path: 'error', component: ErrorComponent },

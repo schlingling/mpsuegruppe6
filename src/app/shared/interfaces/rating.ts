@@ -1,6 +1,6 @@
 export interface Rating {
   uid: string;
   rating: number;
-  timestamp: Date;
-
+  timestamp: number;
+  id?:string
 }

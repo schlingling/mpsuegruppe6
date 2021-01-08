@@ -1,7 +1,7 @@
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import {  HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
@@ -24,6 +24,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { ErrorComponent } from './error/error.component';
 import { DocumentService } from './shared/document.service';
 import { ReflectionComponent } from './reflection/reflection.component';
+import { RatingComponent } from './rating/rating.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { ReflectionComponent } from './reflection/reflection.component';
     LoginComponent,
     ErrorComponent,
     ReflectionComponent,
+    RatingComponent,
 
 
 
@@ -47,10 +50,12 @@ import { ReflectionComponent } from './reflection/reflection.component';
     HammerModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgxSliderModule,
 
   ],
   providers: [QuestionsService,AuthGuard, DocumentService],

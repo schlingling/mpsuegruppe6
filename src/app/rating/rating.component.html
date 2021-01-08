@@ -1,0 +1,41 @@
+<div class="container ratingcontainter" *ngIf="mode === 'slider'">
+  <div class="row justify-content-center">
+    <div class="card" style="width: 18rem">
+      <div class="card-body text-center">
+        <h3>Wir haben nun die heutige Sitzung so gut wie geschaftt!</h3>
+        <p>
+          Überlege dir nun, wie du dich nach der Medidations fühlst. Benutze
+          hierzu den Slider und wähle deinen Wohlfühlfaktor auf einer Sala
+          zwischen 0 bis 7 aus!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapperslider">
+    <div class="row">
+      <div class="col-sm ">
+        <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+      </div>
+    </div>
+
+    <div class="row justify-content-center wrapperslider">
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="submitRatingAndProceed()"
+      >
+        Weiter >
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container" [hidden]="!(mode === 'chart')">
+  <div class="row">
+    <div class="col-sm">
+      <canvas #lineCanvas></canvas>
+      <h5 class="card-title text-center">Line chart</h5>
+    </div>
+  </div>
+</div>

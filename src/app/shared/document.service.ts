@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { Rating } from './interfaces/rating';
 
 
 
@@ -24,6 +25,12 @@ export class DocumentService {
 
   setDocument(document: string, text: any){
     this.firestore.collection(document).add(text)
+  }
+
+
+  getRatings(){
+    return this.firestore.collection('ratings').snapshotChanges();
+
   }
 
 

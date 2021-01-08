@@ -52,7 +52,9 @@ export class AuthService {
       .then((userData) => {
         console.log('Success!');
         //this.user.next(new User(userData.user.email, '0', 'asdf', new Date()));
-        this.setUserData(userData.user).then(() => {
+        this.setUserData(userData.user, username).then(() => {
+          console.log(userData.user)
+
           //TODO: Verification Mail
           this.router.navigate(['/start']);
         });
@@ -80,14 +82,14 @@ export class AuthService {
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  setUserData(user) {
+  setUserData(user, username?:string) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName: username,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
