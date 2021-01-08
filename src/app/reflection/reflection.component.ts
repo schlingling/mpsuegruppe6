@@ -13,6 +13,7 @@ export class ReflectionComponent implements OnInit {
 
   testArray: Observable<Note[]>;
 
+//SEE FOR MORE INFOS TO REQUEST DATA FROM FIREBASE: https://github.com/angular/angularfire/blob/master/docs/firestore/collections.md
 
   constructor(private router: Router,    private firestore: AngularFirestore
     ) { }
