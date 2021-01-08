@@ -5,7 +5,8 @@ import { Statement } from './../shared/interfaces/statement';
 import { Note } from './../shared/interfaces/note';
 import { DocumentService } from '../shared/document.service';
 import { Router } from '@angular/router';
-
+import { AuthService} from './../auth/auth.service';
+ 
 
 @Component({
   selector: 'app-meditation',
@@ -23,13 +24,13 @@ export class MeditationComponent implements OnInit {
   public statements_with_category: Statement[] = [];
   public index: number = 0;
   public contentLoaded: Promise<boolean>;
-  public choosen_statement: String;
+  public choosen_statement: string;
 
   public text_to_save: Note = {};
 
 
 
-  constructor(private questionsService: QuestionsService, private documentService: DocumentService, private router: Router) { }
+  constructor(private questionsService: QuestionsService, private documentService: DocumentService, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
 
@@ -53,27 +54,34 @@ export class MeditationComponent implements OnInit {
           this.timeLeft--;
         } else {
 
-
+          this.defaultValue = "";
           this.timeLeft = 60;
           this.pausePressed = false;
           this.canPress = true;
           clearInterval(this.interval);        }
-      },100)
+      },300)
     }
 
 
   }
 
-  upload(text_from_html: string) {
+
+
+  defaultValue: string = "";
+  upload() {
     //upload data to firestore
 
-    this.text_to_save.note = text_from_html;
+    console.log("upload")
+
+
+    this.text_to_save.note = this.defaultValue;
 
     //TODO
-    this.text_to_save.uid = "123123123";
-    this.text_to_save.statement = "345345345";
+    this.text_to_save.uid = this.auth.userData.uid;
+    this.text_to_save.statement = this.choosen_statement;
 
     this.documentService.setDocument('notes',this.text_to_save);
+    this.defaultValue = "";
   }
 
   getStatement(){

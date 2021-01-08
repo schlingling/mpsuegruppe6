@@ -19,7 +19,8 @@
         class="form-control"
         id="exampleFormControlTextarea1"
         rows="8"
-        #titleInput
+        [(ngModel)]="defaultValue"
+        [ngModelOptions]="{standalone: true}"
       ></textarea>
     </div>
   </form>
@@ -28,7 +29,7 @@
   <button type="button" class="btn btn-success" (click)="startTimer()">
     Start
   </button>
-  <button type="button" class="btn btn-warning" (click)="upload(titleInput.value)">
+  <button type="button" class="btn btn-warning" (click)="upload()">
     Upload
   </button>
   <div></div>
