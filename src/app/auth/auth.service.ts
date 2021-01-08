@@ -5,7 +5,7 @@ import {
   AngularFirestore,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { User } from '../shared/interfaces/user';
 
 export interface AuthResponseData {
@@ -22,11 +22,11 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
-  userData: User;
+  userData= new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
   constructor(
-    private firebaseAuth: AngularFireAuth,
+    public firebaseAuth: AngularFireAuth,
     private router: Router,
     public afs: AngularFirestore
   ) {
@@ -34,7 +34,9 @@ export class AuthService {
     logged in and setting up null when logged out */
     this.firebaseAuth.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
+        this.userData.next(user)
+
+
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
         //console.log("localstorage")
@@ -70,12 +72,13 @@ export class AuthService {
       .then((userData) => {
         console.log('Nice, it worked!');
         //TODO: Make user with autologout
+        console.log(userData)
         this.setUserData(userData.user).then(() => {
           this.router.navigate(['/start']);
         });
       })
       .catch((err) => {
-        console.log('Something went wrong:', err.message);
+        console.log('Something went wrdfdong:', err.message,);
       });
   }
 
@@ -89,8 +92,8 @@ export class AuthService {
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: username,
       photoURL: user.photoURL,
+      displayName: user.displayName,
       emailVerified: user.emailVerified,
     };
     return userRef.set(userData, {

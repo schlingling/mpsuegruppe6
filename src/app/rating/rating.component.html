@@ -27,6 +27,7 @@
       >
         Weiter >
       </button>
+
     </div>
   </div>
 </div>
@@ -34,8 +35,17 @@
 <div class="container" [hidden]="!(mode === 'chart')">
   <div class="row">
     <div class="col-sm">
+      <h5 class="card-title text-center">Entwicklung Wohlfühlscore über die Zeit</h5>
+      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
       <canvas #lineCanvas></canvas>
-      <h5 class="card-title text-center">Line chart</h5>
+    </div>
+    </div>
+    <div class="col-sm">
+      <h5 class="card-title text-center">Anzahl Notizen nach Kategorie</h5>
+      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+
+      <canvas #barCanvas></canvas>
+      </div>
     </div>
   </div>
 </div>
