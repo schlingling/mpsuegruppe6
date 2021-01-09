@@ -14,8 +14,10 @@
 
   <div class="wrapperslider">
     <div class="row">
-      <div class="col-sm ">
-        <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+      <div class="col-sm">
+        <div class="custom-slider">
+          <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+        </div>
       </div>
     </div>
 
@@ -23,11 +25,11 @@
       <button
         type="button"
         class="btn btn-warning"
+        style="background-color: #83DEB6; border-color: #83DEB6;"
         (click)="submitRatingAndProceed()"
       >
         Weiter >
       </button>
-
     </div>
   </div>
 </div>
@@ -35,16 +37,23 @@
 <div class="container" [hidden]="!(mode === 'chart')">
   <div class="row">
     <div class="col-sm">
-      <h5 class="card-title text-center">Entwicklung Wohlfühlscore über die Zeit</h5>
-      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-      <canvas #lineCanvas></canvas>
-    </div>
+      <h5 class="card-title text-center">
+        Entwicklung Wohlfühlscore über die Zeit
+      </h5>
+      <div
+        class="chart-container"
+        style="position: relative; height: 40vh; width: 80vw"
+      >
+        <canvas #lineCanvas></canvas>
+      </div>
     </div>
     <div class="col-sm">
       <h5 class="card-title text-center">Anzahl Notizen nach Kategorie</h5>
-      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-
-      <canvas #barCanvas></canvas>
+      <div
+        class="chart-container"
+        style="position: relative; height: 40vh; width: 80vw"
+      >
+        <canvas #barCanvas></canvas>
       </div>
     </div>
   </div>

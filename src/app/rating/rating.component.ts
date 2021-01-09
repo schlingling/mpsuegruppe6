@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Options } from '@angular-slider/ngx-slider';
 import { FormControl } from '@angular/forms';
