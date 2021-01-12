@@ -59,7 +59,7 @@ export class MeditationComponent implements OnInit {
           this.pausePressed = false;
           this.canPress = true;
           clearInterval(this.interval);        }
-      },300)
+      },100)
     }
 
 
@@ -79,6 +79,7 @@ export class MeditationComponent implements OnInit {
     //TODO
     this.text_to_save.uid = this.auth.userData.value.uid;
     this.text_to_save.statement = this.choosen_statement;
+    this.text_to_save.category = this.category
 
     this.documentService.setDocument('notes',this.text_to_save);
     this.defaultValue = "";

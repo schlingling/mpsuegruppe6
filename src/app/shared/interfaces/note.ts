@@ -3,4 +3,5 @@ export interface Note {
   note?: string;
   statement?: string;
   timestamp?: Date;
+  category?: String;
 }
