@@ -118,8 +118,8 @@ export class RatingComponent implements OnInit {
 
     //Get Data for barplot
     this.notes.forEach((n) => {
-      if (!this.notes_labels.includes(n.statement)) {
-        this.notes_labels.push(n.statement);
+      if (!this.notes_labels.includes(n.category)) {
+        this.notes_labels.push(n.category);
       }
     });
     this.notes_labels.forEach((l) => {
@@ -127,7 +127,7 @@ export class RatingComponent implements OnInit {
         if (!(l in this.notes_vals)) {
           this.notes_vals[l] = 0;
         }
-        if (l == n.statement) {
+        if (l == n.category) {
           this.notes_vals[l] += 1;
         }
       });
