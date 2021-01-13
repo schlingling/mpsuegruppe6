@@ -20,8 +20,9 @@ export class ReflectionComponent implements OnInit {
   public uid: String;
   public all_notes: Note[] = [];
   public categories_and_notes: [String, String []] [] = [];
-  public categorie_and_note: [String, String []];
-  public notes: String [] = [];
+  //public notes: String [] = [];
+  public notes: Note[] = [];
+  public choosen_notes: Note[] = [];
 
 
 
@@ -33,44 +34,54 @@ export class ReflectionComponent implements OnInit {
   ngOnInit(): void {
     this.testArray = this.firestore.collection<Note>('notes').valueChanges();
     this.questions_categories = this.questionsService.getCategories()
-    this.getPostStatements()
     //this.uid = this.auth.userData.value.uid;
+
+    //Wait for user to be logged in, then set Sub for Ratings
+    this.auth.firebaseAuth.onAuthStateChanged((user) => {        
+      this.firestore
+        .collection<Note>('notes', (ref) => ref.where('uid', '==', user.uid)) //FILTER FOR USERDATA
+        .snapshotChanges()
+        .subscribe((data) => {
+          this.notes = data.map((e) => {
+            return {
+              id: e.payload.doc.id,
+              ...e.payload.doc.data(),
+            };
+          });
+
+          this.getPostStatements()
+
+        });
+    });
+
+    
+
   }
 
 
   getPostStatements(){
     //INITIAL GET-REQEUST FOR MESSAGES
-    this.documentService.getDocument('notes').subscribe((data) => {
-      test: String;
-      this.all_notes = data.map((e) => {
-        const q = e.payload.doc.data() as Note;
-        return {
-          uid: e.payload.doc.id,
-          statement: q.statement,
-          note: q.note,
-          category: q.category
-        } as Note;
+
+    console.log(this.notes)
+    this.notes.forEach((note) =>{
+      if (this.questions_categories.includes(note.category)) {
+       this.choosen_notes.push(note);
+    }});
+
+    this.questions_categories.forEach((category) =>{
+      var categorie_and_note: [String, String []] = ["test", []];
+      categorie_and_note[0] = category;
+      this.notes.forEach((note) =>{
+        if (note.category === category){
+          categorie_and_note[1].push(note.note)
+        }
       });
 
-      this.questions_categories.forEach((category) => {
-        
-        this.categorie_and_note[0] = category;
+      this.categories_and_notes.push(categorie_and_note)
+    });
 
-        this.all_notes.forEach((q) => {
-          if (q.category === category) {
+    console.log(this.categories_and_notes)
 
-            this.notes.push(q.statement)
-            
-          }
-        });
-
-        this.categorie_and_note[1] = this.notes;
-
-        this.categories_and_notes.push(this.categorie_and_note)
-
-      });
-      
-  });
 }
 
 

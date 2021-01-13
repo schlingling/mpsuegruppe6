@@ -59,7 +59,7 @@ export class MeditationComponent implements OnInit {
           this.pausePressed = false;
           this.canPress = true;
           clearInterval(this.interval);        }
-      },100)
+      },20)
     }
 
 
