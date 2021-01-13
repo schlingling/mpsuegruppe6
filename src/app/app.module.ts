@@ -26,6 +26,7 @@ import { DocumentService } from './shared/document.service';
 import { ReflectionComponent } from './reflection/reflection.component';
 import { RatingComponent } from './rating/rating.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgxSliderModule,
+    NgbModule,
 
   ],
   providers: [QuestionsService,AuthGuard, DocumentService],
