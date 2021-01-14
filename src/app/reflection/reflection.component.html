@@ -1,21 +1,5 @@
-<p>Reflection works!</p>
 
 <div class="row justify-content-center">
-
-  <div class="btn-group" mdbDropdown>
-    <button mdbDropdownToggle type="button" mdbBtn color="primary" class="dropdown-toggle waves-light"
-      mdbWavesEffect>
-      Basic dropdown
-    </button>
-
-    <div class="dropdown-menu dropdown-primary">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div class="divider dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Separated link</a>
-    </div>
-  </div>
   <button         style="background-color: #83DEB6; border-color: #83DEB6;"
   type="button" class="btn btn-warning" (click)="goToRating()">Weiter ></button>
 
@@ -30,6 +14,7 @@
     <ng-template ngbPanelContent *ngFor="let note of c_and_n[1]">
       
         {{note}}
+        <p>hi</p>
 
     </ng-template>
     </ngb-panel>
