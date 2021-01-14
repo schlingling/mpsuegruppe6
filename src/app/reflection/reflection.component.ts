@@ -33,7 +33,6 @@ export class ReflectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.testArray = this.firestore.collection<Note>('notes').valueChanges();
-    this.questions_categories = this.questionsService.getCategories()
     //this.uid = this.auth.userData.value.uid;
 
     //Wait for user to be logged in, then set Sub for Ratings
@@ -47,6 +46,13 @@ export class ReflectionComponent implements OnInit {
               id: e.payload.doc.id,
               ...e.payload.doc.data(),
             };
+          });
+
+          //Get Categories from requested notes
+          this.notes.forEach((q) => {
+            if (!this.questions_categories.includes(q.category)) {
+              this.questions_categories.push(q.category);
+            }
           });
 
           this.getPostStatements()

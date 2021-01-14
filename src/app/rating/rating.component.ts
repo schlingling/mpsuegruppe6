@@ -175,6 +175,8 @@ export class RatingComponent implements OnInit {
         ],
       },
       options: {
+        maintainAspectRatio: false,
+
         scales: {
           xAxes: [
             {
@@ -223,6 +225,7 @@ export class RatingComponent implements OnInit {
         ],
       },
       options: {
+        maintainAspectRatio: false,
 
         scales: {
           yAxes: [
@@ -243,5 +246,9 @@ export class RatingComponent implements OnInit {
         },
       },
     });
+  }
+
+  fertig(){
+    this.router.navigate(['/start'])
   }
 }

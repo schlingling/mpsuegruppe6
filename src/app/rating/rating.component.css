@@ -18,6 +18,10 @@
   top: -1px;
 }
 
+.chart-container{
+  margin-top: 10%;
+}
+
 
 .custom-slider .ngx-slider .ngx-slider-pointer {
   width: 8px;

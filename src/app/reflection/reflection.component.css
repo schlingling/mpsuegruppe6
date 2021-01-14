@@ -1,10 +1,8 @@
-.sytle{
-    width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+.wrapper{
+  margin: 10%;
+  vertical-align: middle;
 
+}
 .card {
     width: 40%;
     height: 100px;
@@ -14,4 +12,9 @@
     color: white;
     text-align: center;
     vertical-align: middle;
+  }
+
+  .acc{
+    width: 100%;
+    margin: 5%;
   }

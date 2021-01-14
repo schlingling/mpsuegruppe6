@@ -37,7 +37,7 @@
 <div class="container" [hidden]="!(mode === 'chart')">
   <div class="row">
     <div class="col-sm">
-      <h5 class="card-title text-center">
+      <h5 class="card-title text-center" style="margin-top: 10%;">
         Entwicklung Wohlfühlscore über die Zeit
       </h5>
       <div
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="col-sm">
-      <h5 class="card-title text-center">Anzahl Notizen nach Kategorie</h5>
+      <h5 class="card-title text-center" style="margin-top: 10%;">Anzahl Notizen nach Kategorie</h5>
       <div
         class="chart-container"
         style="position: relative; height: 40vh; width: 80vw"
@@ -56,5 +56,16 @@
         <canvas #barCanvas></canvas>
       </div>
     </div>
+  </div>
+
+  <div class="row justify-content-center wrapperslider">
+    <button
+      type="button"
+      class="btn btn-warning"
+      style="background-color: #83DEB6; border-color: #83DEB6;"
+      (click)="fertig()"
+    >
+      Fertig >
+    </button>
   </div>
 </div>
