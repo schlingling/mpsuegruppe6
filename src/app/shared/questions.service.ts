@@ -54,7 +54,7 @@ export class QuestionsService {
   }
 
   setCategories(categories: String[]){
-    this.questions_categories = categories
+    this.questions_categories = categories.slice()
     console.log(categories)
   }
 

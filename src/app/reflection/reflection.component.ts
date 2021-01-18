@@ -32,6 +32,12 @@ export class ReflectionComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+
+    //this.questions_categories = this.questionsService.getCategories()
+    //this.questions_categories.splice(0,2)
+
+    //console.log(this.questions_categories)
+
     this.testArray = this.firestore.collection<Note>('notes').valueChanges();
     //this.uid = this.auth.userData.value.uid;
 
@@ -48,17 +54,29 @@ export class ReflectionComponent implements OnInit {
             };
           });
 
+          if(this.questions_categories.length < 1){
+            console.log(this.questions_categories)
+
+            this.getPostStatements()
+          }
+          
           //Get Categories from requested notes
           this.notes.forEach((q) => {
             if (!this.questions_categories.includes(q.category)) {
               this.questions_categories.push(q.category);
             }
           });
+          //console.log(this.questions_categories)
 
-          this.getPostStatements()
+          //4
+          
+
 
         });
+
     });
+    
+
 
     
 
@@ -68,13 +86,34 @@ export class ReflectionComponent implements OnInit {
   getPostStatements(){
     //INITIAL GET-REQEUST FOR MESSAGES
 
+
+    this.questions_categories.forEach((category) => {
+
+      var categorie_and_note: [String, String []] = ["test", []];
+      categorie_and_note[0] = category;
+      this.notes.forEach((note) =>{
+        if (note.category === category){
+          categorie_and_note[1].push(note.note)
+        }
+      });
+
+      this.categories_and_notes.push(categorie_and_note)
+      
+
+    });
+
+    console.log(this.categories_and_notes)
+    /*
+
     console.log(this.notes)
     this.notes.forEach((note) =>{
-      if (this.questions_categories.includes(note.category)) {
+      
        this.choosen_notes.push(note);
-    }});
+    });
 
+    console.log("test" + this.questions_categories)
     this.questions_categories.forEach((category) =>{
+      
       var categorie_and_note: [String, String []] = ["test", []];
       categorie_and_note[0] = category;
       this.notes.forEach((note) =>{
@@ -87,7 +126,7 @@ export class ReflectionComponent implements OnInit {
     });
 
     console.log(this.categories_and_notes)
-
+    */
 }
 
 
