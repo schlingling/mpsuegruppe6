@@ -42,7 +42,7 @@ export class ReflectionComponent implements OnInit {
     //this.uid = this.auth.userData.value.uid;
 
     //Wait for user to be logged in, then set Sub for Ratings
-    this.auth.firebaseAuth.onAuthStateChanged((user) => {        
+    this.auth.firebaseAuth.onAuthStateChanged((user) => {
       this.firestore
         .collection<Note>('notes', (ref) => ref.where('uid', '==', user.uid)) //FILTER FOR USERDATA
         .snapshotChanges()
@@ -55,11 +55,8 @@ export class ReflectionComponent implements OnInit {
           });
 
           if(this.questions_categories.length < 1){
-            console.log(this.questions_categories)
 
-            this.getPostStatements()
-          }
-          
+
           //Get Categories from requested notes
           this.notes.forEach((q) => {
             if (!this.questions_categories.includes(q.category)) {
@@ -69,16 +66,20 @@ export class ReflectionComponent implements OnInit {
           //console.log(this.questions_categories)
 
           //4
-          
+
+            console.log(this.questions_categories)
+
+            this.getPostStatements()
+          }
 
 
         });
 
     });
-    
 
 
-    
+
+
 
   }
 
@@ -98,7 +99,7 @@ export class ReflectionComponent implements OnInit {
       });
 
       this.categories_and_notes.push(categorie_and_note)
-      
+
 
     });
 
@@ -107,13 +108,13 @@ export class ReflectionComponent implements OnInit {
 
     console.log(this.notes)
     this.notes.forEach((note) =>{
-      
+
        this.choosen_notes.push(note);
     });
 
     console.log("test" + this.questions_categories)
     this.questions_categories.forEach((category) =>{
-      
+
       var categorie_and_note: [String, String []] = ["test", []];
       categorie_and_note[0] = category;
       this.notes.forEach((note) =>{

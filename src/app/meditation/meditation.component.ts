@@ -28,7 +28,9 @@ export class MeditationComponent implements OnInit {
   public text_to_save: Note = {};
 
   safeURL: SafeResourceUrl;
-  videoURL: string = 'https://www.youtube.com/embed/s7jXASBWwwI?autoplay=1&cc_load_policy=1';
+  videoURL: string = 'https://www.youtube.com/embed/-Rf0qydNM70?autoplay=1&cc_load_policy=1';
+
+  'https://www.youtube.com/embed/-Rf0qydNM70?autoplay=1&cc_load_policy=1'
 
   constructor(
     private questionsService: QuestionsService,

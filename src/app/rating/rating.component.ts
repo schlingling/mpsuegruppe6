@@ -183,7 +183,7 @@ export class RatingComponent implements OnInit {
               type: 'time',
               distribution: 'linear',
               time: {
-                unit: 'hour',
+                unit: 'day',
               },
             },
           ],
@@ -202,7 +202,7 @@ export class RatingComponent implements OnInit {
         labels: this.notes_labels,
         datasets: [
           {
-            label: '# of Notes',
+            label: '# of Notizen',
             data: this.notes_vals2,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',

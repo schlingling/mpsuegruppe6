@@ -1,25 +1,39 @@
 <div class="wrapper">
-<h3>Ihre Notizen</h3>
+  <h3>Ihre Notizen</h3>
 
-<div class="row ">
+  <div class="row">
+    <ngb-accordion
+      class="acc"
+      #acc="ngbAccordion"
+      activeIds="ngb-panel-0"
+      *ngFor="let c_and_n of categories_and_notes"
+    >
+      <ngb-panel class="card" title="{{ c_and_n[0] }}">
 
-  <ngb-accordion class="acc" #acc="ngbAccordion" activeIds="ngb-panel-0" *ngFor="let c_and_n of categories_and_notes">
-    <ngb-panel class="card" title="{{c_and_n[0]}}">
-      <ng-template ngbPanelContent *ngFor="let note of c_and_n[1]">
-  
-        {{note}}
-        <p>hi</p>
-  
-      </ng-template>
-    </ngb-panel>
-  
-  </ngb-accordion>
+
+
+        <ng-template ngbPanelContent >
+
+          <li *ngFor="let note of c_and_n[1]" >
+            {{ note }}
+
+          </li>
+
+
+        </ng-template>
+
+      </ngb-panel>
+    </ngb-accordion>
   </div>
 
-<div class="row justify-content-center">
-  <button style="background-color: #83DEB6; border-color: #83DEB6;" type="button" class="btn btn-warning"
-    (click)="goToRating()">Weiter ></button>
+  <div class="row justify-content-center">
+    <button
+      style="background-color: #83deb6; border-color: #83deb6"
+      type="button"
+      class="btn btn-warning"
+      (click)="goToRating()"
+    >
+      Weiter >
+    </button>
+  </div>
 </div>
-</div>
-
-
