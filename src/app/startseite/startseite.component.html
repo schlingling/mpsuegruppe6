@@ -7,14 +7,19 @@
   <div class="row">
     <div class="textspacer">
       <p>
-        Suche Dir einen ruhigen Ort, mach es Dir gemütlich, schalte Deine Benachrichtigungen aus und versuche dich bewusst nicht ablenken zu lassen.
-        </p>
-        <p>Meditation hilft Dir zu entspannen und kann nachhaltig Deinen Stress senken und deine Konzentration steigern.</p>
-        <p>Viel Spaß mit deiner Zeit für Dich!</p>
+        Suche Dir einen ruhigen Ort, mach es Dir gemütlich, schalte Deine Benachrichtigungen aus und versuche dich
+        bewusst nicht ablenken zu lassen.
+      </p>
+      <p>Meditation hilft Dir zu entspannen und kann nachhaltig Deinen Stress senken und deine Konzentration steigern.
+      </p>
+      <p>Viel Spaß mit deiner Zeit für Dich!</p>
 
-        <p>So vielen Usern konnten wir bereits helfen!</p>
+      <p>So vielen Usern konnten wir bereits fokussieren: </p> <button type="button" style="border-style: none;" class="btn btn-outline-secondary"
+        triggers="click" [autoClose]="'outside'" ngbTooltip="Das sind schon {{amountNotes }}😱 Notizen">
+
         <p style="font-size:50px">🥳 {{amountUsers}} 💪</p>
-        <p>Profitiere auch DU von uns und werde ein besserer Mensch!</p>
+      </button>
+      <p>Profitiere auch DU von uns und werde ein besserer Mensch!</p>
 
 
 
@@ -22,8 +27,8 @@
   </div>
   <div class="row">
     <div class="col text-center">
-      <button         style="background-color: #83DEB6; border-color: #83DEB6; color: black"
-       type="button" class="btn btn-success" (click)="redirectToFrage()">
+      <button style="background-color: #83DEB6; border-color: #83DEB6; color: black" type="button"
+        class="btn btn-success" (click)="redirectToFrage()">
         Start >
       </button>
     </div>

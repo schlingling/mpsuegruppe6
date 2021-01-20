@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -14,31 +16,36 @@ export class LoginComponent implements OnInit {
   password: string;
   username: string;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, public router: Router, private firestore: AngularFirestore,) { }
 
   ngOnInit(): void {
+
+    
+      this.router.navigate(['/start'])
   }
 
-  signup() {
-    this.authService.signup(this.username,this.email, this.password);
-    this.email = this.password = '';
-  }
 
-  login() {
-    this.authService.login(this.email, this.password);
-    this.email = this.password = '';
-  }
 
-  logout() {
-    this.authService.logout();
-  }
+signup() {
+  this.authService.signup(this.username, this.email, this.password);
+  this.email = this.password = '';
+}
 
-  forgotPassword(){
-    this.authService.forgotPassword(this.email);
-  }
+login() {
+  this.authService.login(this.email, this.password);
+  this.email = this.password = '';
+}
 
-  switchLoginMode(){
-    this.isLoginMode=!this.isLoginMode;
-  }
+logout() {
+  this.authService.logout();
+}
+
+forgotPassword(){
+  this.authService.forgotPassword(this.email);
+}
+
+switchLoginMode(){
+  this.isLoginMode = !this.isLoginMode;
+}
 
 }
