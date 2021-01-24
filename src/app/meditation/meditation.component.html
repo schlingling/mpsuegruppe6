@@ -3,26 +3,24 @@
 
 
   <div class="row justify-content-center text-center">
-    <h3>Überschrift für seite</h3>
+    <h3>Meditationsphase</h3>
   </div>
 
   <div class="row justify-content-center text-center">
 
     <p>
-     Anleitung...
+     Suche dir eine entspannte Position und denke bewusst über die gestellten Fragen nach.
+    Versuch deine Gedanken im Notizenfeld auszuformulieren und zu speichern.
     </p>
   </div>
 
   <div class="row justify-content-center">
-    <h5>{{ timeLeft }} Seconds Left....</h5>
+    <h2>{{ timeLeft }}</h2>
     <p>Nehme dir nun die Zeit über folgendes nachzudenken: </p>
+    <img src="https://svgsilh.com/png-1024/2986417.png" width="100px" alt="">
 
     <div>
-    <p>{{ choosen_statement }} </p>
-  </div>
-
-    <p>Der Timer kann mit den entsprechenden Buttons gestartet werden.</p>
-  </div>
+    <p class=statement> {{ choosen_statement }} </p>
 
 <div class="row justify-content-center">
   <form>
@@ -39,13 +37,11 @@
   </form>
 </div>
 <div class="row justify-content-center">
-  <button type="button" class="btn btn-success" (click)="startTimer()"         style="background-color: #83DEB6; border-color: #83DEB6; color:black;"
+  <button #buttonVar type="button" class="btn btn-success" (click)="switchButtons()"         style="background-color: #83DEB6; border-color: #83DEB6; color:black;"
   >
-    Start >
+    {{buttonValue}}
   </button>
-  <button type="button" class="btn btn-warning" (click)="upload()">
-    Upload
-  </button>
+  
   <div></div>
 
 </div>

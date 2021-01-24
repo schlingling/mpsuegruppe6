@@ -13,6 +13,8 @@ import { DocumentService } from '../shared/document.service';
 import { Router } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { exit } from 'process';
+
 
 @Component({
   selector: 'app-meditation',
@@ -23,6 +25,9 @@ export class MeditationComponent implements OnInit {
   timeLeft: number = 60;
   interval;
 
+
+  public buttonValue: String = "Start >"
+  public startButtonOn: Boolean = true;
   public questions_categories: String[] = [];
   public category: String;
   public all_statements: Statement[] = [];
@@ -30,6 +35,8 @@ export class MeditationComponent implements OnInit {
   public index: number = 0;
   public contentLoaded: Promise<boolean>;
   public choosen_statement: string;
+  @ViewChild('buttonVar') el:ElementRef;
+
 
   public text_to_save: Note = {};
 
@@ -56,7 +63,7 @@ export class MeditationComponent implements OnInit {
   ngOnInit(): void {
     this.questions_categories = this.questionsService.getCategories();
     console.log(this.questionsService.getCategories());
-
+    this.anzRounds = this.questions_categories.length;
 
     //Init Music with youtube
     this.video = '-Rf0qydNM70';
@@ -65,25 +72,43 @@ export class MeditationComponent implements OnInit {
 
   public pausePressed: boolean = false;
   public canPress: boolean = true;
+  public anzRounds;
+
 
   startTimer() {
+
     if (this.canPress == true) {
       this.canPress = false;
 
       if (this.pausePressed == false) {
+        
         this.getStatement();
       }
       this.interval = setInterval(() => {
         if (this.timeLeft > 0) {
+
+          
           this.timeLeft--;
         } else {
+          console.log(this.anzRounds)
+          this.anzRounds--;
+
+          if (this.anzRounds <= 0){
+            this.router.navigate(['/reflection']);
+            exit;
+          }
+
+
           this.defaultValue = '';
           this.timeLeft = 60;
           this.pausePressed = false;
           this.canPress = true;
           clearInterval(this.interval);
+          this.switchButtons()
+          this.buttonValue = "Start >"
+          this.startButtonOn = !this.startButtonOn;
         }
-      }, 20);
+      }, 200);
     }
   }
 
@@ -95,13 +120,14 @@ export class MeditationComponent implements OnInit {
 
     this.text_to_save.note = this.defaultValue;
 
-    //TODO
     this.text_to_save.uid = this.auth.userData.value.uid;
     this.text_to_save.statement = this.choosen_statement;
     this.text_to_save.category = this.category;
 
     this.documentService.setDocument('notes', this.text_to_save);
     this.defaultValue = '';
+
+    //TODO clear textarea
   }
 
   getStatement() {
@@ -248,4 +274,22 @@ export class MeditationComponent implements OnInit {
     }
     this.videoState=!this.videoState;
   }
+
+
+  switchButtons(){
+    console.log("siwtchBUttons in")
+    if (this.startButtonOn == true){
+      this.startTimer()
+      this.buttonValue = "Upload ^"
+      this.startButtonOn = !this.startButtonOn;
+
+    }else{
+      this.upload()
+    }
+
+    
+    
+
+  }
+
 }

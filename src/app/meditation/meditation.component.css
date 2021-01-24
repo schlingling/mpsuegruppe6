@@ -5,3 +5,9 @@
   align-items: center;
   justify-content: center;
 }
+.statement{
+  font-family: Garamond, serif;
+  font-weight: bold;
+  justify-content: center;
+  font-size: large;
+}
