@@ -115,6 +115,9 @@ export class MeditationComponent implements OnInit {
   defaultValue: string = '';
   upload() {
     //upload data to firestore
+    if (this.defaultValue === ""){
+      return;
+    }
 
     console.log('upload');
 
