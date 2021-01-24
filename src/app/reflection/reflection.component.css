@@ -1,8 +1,19 @@
 .wrapper{
-  margin: 10%;
+  margin-top: 10%;
+  margin-left: 3rem;
+  margin-right: 3rem;
+
   vertical-align: middle;
 
 }
+
+.text{
+  margin-left: 3rem;
+  margin-right: 3rem;
+
+  vertical-align: middle;
+}
+
 .card {
     width: 40%;
     height: 100px;

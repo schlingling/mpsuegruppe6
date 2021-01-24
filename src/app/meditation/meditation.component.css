@@ -9,5 +9,16 @@
   font-family: Garamond, serif;
   font-weight: bold;
   justify-content: center;
-  font-size: large;
+  font-size: 200%;
+}
+
+.timeAndClock{
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+}
+.time{
+  font-weight: bold;
+  justify-content: center;
+  font-size: 500%;
 }
