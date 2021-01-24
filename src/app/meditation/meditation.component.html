@@ -11,7 +11,7 @@
   </div>
 
   <div class="row justify-content-center text-center">
-      Versuch deine Gedanken im Notizenfeld auszuformulieren und zu speichern.    
+      Versuch deine Gedanken im Notizenfeld auszuformulieren und zu speichern.
   </div>
 
   <div class="row justify-content-center text-center ">
@@ -20,12 +20,12 @@
   </div>
 
   <div class="row justify-content-center text-center ">
-    <p class=statement> {{ choosen_statement }} </p>
+    <p class="statement"> {{ choosen_statement }} </p>
   </div>
-  
 
-  
-    
+
+
+
 
 <div class="row justify-content-center">
   <form>
@@ -46,7 +46,7 @@
   >
     {{buttonValue}}
   </button>
-  
+
   <div></div>
 
 </div>
@@ -56,8 +56,8 @@
 
 <button type="button" class="btn btn-light" (click)="toogleVideo()">
 
-  <i class="fas fa-volume-mute" *ngIf="videoState"></i>
-  <i class="fas fa-volume-up" *ngIf="!videoState"></i>
+  <i class="fas fa-volume-mute" *ngIf="!videoState"></i>
+  <i class="fas fa-volume-up" *ngIf="videoState"></i>
 
 </button>
 
