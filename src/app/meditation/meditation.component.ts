@@ -108,7 +108,7 @@ export class MeditationComponent implements OnInit {
           this.buttonValue = "Start >"
           this.startButtonOn = !this.startButtonOn;
         }
-      }, 200);
+      }, 400);
     }
   }
 
